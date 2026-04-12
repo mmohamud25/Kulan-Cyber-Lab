@@ -388,6 +388,7 @@
 <script>
   // ── CONFIG ──────────────────────────────────────────────────────────────────
   const SUPABASE_URL = "https://xkadqvmqxdyqoddiypet.supabase.co/functions/v1/claude-proxy";
+  const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhrYWRxdm1xeGR5cW9kZGl5cGV0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNzI5NDMsImV4cCI6MjA4ODk0ODk0M30.FPBEXOx62vaTcLom7IkVRKRLda1xKk09slhQZ9yuRWc";
 
   const MODES = {
     ctf: {
@@ -649,7 +650,11 @@ After student answers, evaluate each and provide detailed explanations.`
   async function callClaude(msgs) {
     const res = await fetch(SUPABASE_URL, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
+        "apikey": SUPABASE_ANON_KEY
+      },
       body: JSON.stringify({
         model: "claude-sonnet-4-20250514",
         max_tokens: 1000,
