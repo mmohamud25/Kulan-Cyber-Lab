@@ -3,194 +3,239 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Kulan Cyber Lab | Kulan Institute</title>
+<title>Kulan Cyber Lab | Free AI-Powered Cybersecurity Training</title>
+<meta name="description" content="Free AI-powered cybersecurity labs covering CTF challenges, real-world attack simulations, and CompTIA Security+ SY0-701 exam prep. Built by Kulan Institute."/>
+<meta name="keywords" content="cybersecurity training, CTF challenges, Security+ SY0-701, ethical hacking, Kulan Institute, free cybersecurity labs, AI cybersecurity"/>
+<meta name="author" content="Kulan Institute"/>
+<meta property="og:title" content="Kulan Cyber Lab | Free AI-Powered Cybersecurity Training"/>
+<meta property="og:description" content="Interactive AI-powered labs covering CTF challenges, attack simulations, and Security+ SY0-701 exam prep. Every session is unique. No setup required."/>
+<meta property="og:url" content="https://labs.kulaninstitute.org"/>
+<meta property="og:type" content="website"/>
+<meta property="og:image" content="https://labs.kulaninstitute.org/og-image.png"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Kulan Cyber Lab"/>
+<meta name="twitter:description" content="Free AI-powered cybersecurity labs. CTF challenges, simulations, Security+ prep. No setup required."/>
+<link rel="canonical" href="https://labs.kulaninstitute.org"/>
 <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
-
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#F0F4F8;--surface:#FFFFFF;--surface2:#F8FAFB;
-  --border:#E2E8F0;--text:#0B2545;--text2:#334155;--muted:#64748B;
-  --teal:#0D9488;--teal-bg:#F0FDFA;--gold:#D97706;--gold-bg:#FFFBEB;
-  --navy:#0B2545;--purple:#7C3AED;--purple-bg:#F5F3FF;--red:#EF4444;
-  --sh:0 1px 4px rgba(11,37,69,.08);--shm:0 4px 16px rgba(11,37,69,.1);--shl:0 8px 32px rgba(11,37,69,.14)
+  --bg:#F8FAFB;--surface:#FFFFFF;--surface2:#F1F5F9;
+  --border:#E2E8F0;--border2:#CBD5E1;
+  --text:#0F172A;--text2:#64748B;
+  --teal:#0D9488;--teal-l:#F0FDFA;--teal-m:#CCFBF1;
+  --gold:#D97706;--gold-l:#FFFBEB;
+  --navy:#0B2545;--purple:#7C3AED;--purple-l:#EDE9FE;
+  --green:#10B981;--red:#EF4444;
+  --shadow:0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.05);
+  --shadow-md:0 4px 12px rgba(0,0,0,.08),0 2px 6px rgba(0,0,0,.05);
+  --shadow-lg:0 10px 28px rgba(0,0,0,.1),0 4px 10px rgba(0,0,0,.06);
 }
 html,body{height:100%}
 body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;min-height:100vh;overflow-x:hidden}
-::-webkit-scrollbar{width:4px}::-webkit-scrollbar-thumb{background:var(--teal);border-radius:4px}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--surface2)}::-webkit-scrollbar-thumb{background:var(--teal);border-radius:4px}
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes dot{0%,80%,100%{opacity:0;transform:scale(.8)}40%{opacity:1;transform:scale(1)}}
-@keyframes slideIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 @keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
-@keyframes notesIn{from{transform:translateX(100%)}to{transform:translateX(0)}}
-.screen{display:none;position:relative;z-index:2}
+@keyframes popIn{from{opacity:0;transform:scale(.95) translateY(10px)}to{opacity:1;transform:scale(1) translateY(0)}}
+@keyframes modalIn{from{opacity:0}to{opacity:1}}
+
+.screen{display:none;position:relative}
 .screen.active{display:block}
 #lab.active{display:flex}
 
 /* HOME */
 #home{min-height:100vh;background:var(--bg)}
 .home-inner{max-width:1000px;margin:0 auto;padding:0 28px}
-.top-bar{padding:28px 0 0;display:flex;align-items:center;justify-content:space-between}
+.top-bar{padding:30px 0 14px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .logo-wrap{display:flex;align-items:center;gap:12px}
-.logo-icon{width:42px;height:42px;border-radius:10px;background:linear-gradient(135deg,var(--teal),#065F5A);display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:var(--shm)}
-.logo-sub{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--teal);letter-spacing:3px}
+.logo-icon{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--teal),var(--navy));display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:var(--shadow-md)}
+.logo-sub{font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--teal);letter-spacing:3px}
 .logo-title{font-size:18px;font-weight:700;color:var(--navy)}
-.ai-badge{display:flex;align-items:center;gap:6px;background:var(--teal-bg);border:1px solid rgba(13,148,136,.2);border-radius:20px;padding:5px 12px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--teal)}
+.top-actions{display:flex;align-items:center;gap:10px}
+.ai-badge{display:flex;align-items:center;gap:6px;background:var(--teal-l);border:1px solid var(--teal-m);border-radius:20px;padding:5px 12px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--teal)}
 .ai-dot{width:6px;height:6px;border-radius:50%;background:var(--teal);animation:pulse 2s infinite}
-.hero-banner{background:linear-gradient(135deg,#0B2545 0%,#0D4060 60%,#0A5F59 100%);border-radius:20px;padding:56px 48px;margin:24px 0 36px;color:#fff;position:relative;overflow:hidden;box-shadow:var(--shl)}
-.hero-banner::after{content:'';position:absolute;top:-40px;right:-40px;width:280px;height:280px;border-radius:50%;background:rgba(13,148,136,.15);pointer-events:none}
-.hero-tag{font-family:'Share Tech Mono',monospace;font-size:10px;color:rgba(13,148,136,.9);letter-spacing:5px;margin-bottom:16px}
-.hero-banner h1{font-size:clamp(28px,5vw,52px);font-weight:700;line-height:1.1;letter-spacing:-1px;margin-bottom:14px;position:relative;z-index:1}
-.hero-banner h1 .t{color:#4DD9CC}
-.hero-banner h1 .g{color:#FCD34D}
-.hero-banner p{font-size:16px;color:rgba(255,255,255,.75);max-width:480px;line-height:1.7;margin-bottom:28px;position:relative;z-index:1}
-.btn-primary{background:var(--teal);color:#fff;border:none;padding:13px 36px;border-radius:8px;font-family:'Share Tech Mono',monospace;font-size:13px;letter-spacing:2px;cursor:pointer;transition:all .2s;box-shadow:0 4px 16px rgba(13,148,136,.4);position:relative;z-index:1}
-.btn-primary:hover{background:#0AA899;transform:translateY(-2px);box-shadow:0 8px 24px rgba(13,148,136,.5)}
-.stats-row{display:flex;gap:0;margin-bottom:32px;background:var(--surface);border-radius:12px;box-shadow:var(--sh);overflow:hidden;border:1px solid var(--border)}
-.stat{flex:1;text-align:center;padding:20px 16px;border-right:1px solid var(--border)}
+.hist-btn{background:var(--surface);border:1px solid var(--border);color:var(--text2);padding:7px 14px;border-radius:8px;cursor:pointer;font-family:'Share Tech Mono',monospace;font-size:11px;transition:all .2s;box-shadow:var(--shadow);display:flex;align-items:center;gap:6px}
+.hist-btn:hover{border-color:var(--teal);color:var(--teal)}
+.hist-count{background:var(--teal);color:#fff;border-radius:10px;padding:1px 7px;font-size:10px;font-weight:700}
+.hero{text-align:center;padding:48px 0 36px;animation:fadeUp .6s ease}
+.hero-tag{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:5px;margin-bottom:18px;font-weight:600}
+.hero h1{font-size:clamp(28px,5vw,52px);font-weight:700;line-height:1.1;letter-spacing:-1px;margin-bottom:14px;color:var(--navy)}
+.hero h1 .t{color:var(--teal)}.hero h1 .g{color:var(--gold)}
+.hero p{font-size:17px;color:var(--text2);max-width:500px;margin:0 auto 30px;line-height:1.7}
+.btn-primary{background:var(--teal);color:#fff;border:none;padding:13px 36px;border-radius:8px;font-family:'Share Tech Mono',monospace;font-size:13px;letter-spacing:2px;cursor:pointer;transition:all .2s;box-shadow:0 4px 14px rgba(13,148,136,.35)}
+.btn-primary:hover{background:#0A7A70;transform:translateY(-2px);box-shadow:0 8px 24px rgba(13,148,136,.4)}
+.stats-row{display:flex;gap:0;justify-content:center;margin:0 auto 36px;background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;max-width:360px;box-shadow:var(--shadow)}
+.stat{flex:1;text-align:center;padding:14px 16px;border-right:1px solid var(--border)}
 .stat:last-child{border-right:none}
-.stat-num{font-size:26px;font-weight:700;color:var(--teal);display:block;font-family:'Share Tech Mono',monospace}
-.stat-label{font-size:10px;color:var(--muted);letter-spacing:2px;margin-top:4px;display:block}
-.cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;padding-bottom:48px}
-.mode-card{background:var(--surface);border-radius:14px;padding:28px;cursor:pointer;transition:all .25s;border:1px solid var(--border);box-shadow:var(--sh)}
-.mode-card:hover{transform:translateY(-4px);box-shadow:var(--shl)}
-.card-icon{font-size:28px;margin-bottom:14px}
-.card-title{font-size:16px;font-weight:700;margin-bottom:8px}
-.card-desc{font-size:13px;color:var(--muted);line-height:1.65}
-.card-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px}
-.card-tag{font-family:'Share Tech Mono',monospace;font-size:10px;padding:3px 8px;border-radius:4px;border:1px solid;opacity:.8}
-.footer-tag{text-align:center;padding-bottom:32px;font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:1px}
+.stat-num{font-size:22px;font-weight:700;color:var(--teal);display:block;font-family:'Share Tech Mono',monospace}
+.stat-label{font-size:10px;color:var(--text2);letter-spacing:2px;font-family:'Share Tech Mono',monospace}
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;padding-bottom:48px}
+.mode-card{background:var(--surface);border-radius:14px;padding:26px;cursor:pointer;transition:all .25s;border:1px solid var(--border);box-shadow:var(--shadow)}
+.mode-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.card-top{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.card-icon-wrap{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px}
+.card-title{font-size:17px;font-weight:700;color:var(--navy)}
+.card-desc{font-size:13px;color:var(--text2);line-height:1.65;margin-bottom:14px}
+.card-tags{display:flex;gap:6px;flex-wrap:wrap}
+.card-tag{font-family:'Share Tech Mono',monospace;font-size:10px;padding:3px 9px;border-radius:20px;border:1px solid;font-weight:600}
+.home-footer{text-align:center;padding-bottom:32px;font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--text2);letter-spacing:1px}
 
 /* SELECT */
 #select{min-height:100vh;background:var(--bg)}
-.select-inner{max-width:840px;margin:0 auto;padding:0 28px}
-.select-topbar{padding:28px 0 20px;display:flex;align-items:center;gap:14px}
-.select-label{font-family:'Share Tech Mono',monospace;color:var(--muted);font-size:11px;letter-spacing:3px}
-.btn-ghost{background:var(--surface);border:1px solid var(--border);color:var(--muted);padding:7px 14px;border-radius:8px;cursor:pointer;font-family:'Share Tech Mono',monospace;font-size:11px;transition:all .2s;box-shadow:var(--sh)}
+.select-inner{max-width:820px;margin:0 auto;padding:0 28px}
+.select-topbar{padding:26px 0 20px;display:flex;align-items:center;gap:14px;border-bottom:1px solid var(--border);margin-bottom:22px}
+.select-label{font-family:'Share Tech Mono',monospace;color:var(--teal);font-size:11px;letter-spacing:3px;font-weight:600}
+.btn-ghost{background:var(--surface);border:1px solid var(--border);color:var(--text2);padding:7px 14px;border-radius:8px;cursor:pointer;font-family:'Share Tech Mono',monospace;font-size:11px;transition:all .2s;box-shadow:var(--shadow)}
 .btn-ghost:hover{border-color:var(--teal);color:var(--teal)}
-.mode-tabs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.mode-tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
 .mode-tab{border:1px solid;padding:8px 18px;border-radius:8px;cursor:pointer;font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:1px;font-weight:700;transition:all .2s;background:transparent}
-.diff-label{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:2px;margin-bottom:8px}
-.diff-pills{display:flex;gap:8px;margin-bottom:24px}
-.diff-pill{background:var(--surface);border:1px solid var(--border);color:var(--muted);padding:6px 18px;border-radius:20px;cursor:pointer;font-family:'Share Tech Mono',monospace;font-size:11px;font-weight:700;transition:all .2s}
-.diff-pill:hover{border-color:var(--teal);color:var(--teal)}
-.topic-header{margin-bottom:18px;animation:fadeUp .35s ease}
-.topic-header h2{font-size:20px;font-weight:700;margin-bottom:6px}
-.topic-header p{color:var(--muted);font-size:14px;line-height:1.5}
-.topic-hint{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:3px;margin-bottom:12px}
+.diff-row{display:flex;align-items:center;gap:8px;margin-bottom:18px;flex-wrap:wrap}
+.diff-label{font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--text2);letter-spacing:1px;margin-right:4px}
+.diff-btn{border:1px solid;padding:6px 16px;border-radius:20px;cursor:pointer;font-family:'Share Tech Mono',monospace;font-size:11px;font-weight:700;transition:all .2s;background:transparent}
+.topic-header{margin-bottom:18px;animation:fadeUp .3s ease}
+.topic-header h2{font-size:20px;font-weight:700;margin-bottom:6px;color:var(--navy)}
+.topic-header p{color:var(--text2);font-size:14px;line-height:1.5}
+.topic-hint{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--text2);letter-spacing:3px;margin-bottom:10px;font-weight:600}
 .topic-list{display:grid;gap:8px}
-.topic-item{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px 20px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:all .2s;animation:slideIn .3s ease both;box-shadow:var(--sh)}
-.topic-name{font-weight:700;font-size:15px;color:var(--text)}
-.topic-meta{font-size:11px;color:var(--muted);margin-top:3px;font-family:'Share Tech Mono',monospace}
+.topic-item{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:15px 20px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:all .2s;animation:slideIn .3s ease both;box-shadow:var(--shadow)}
+.topic-name{font-weight:700;font-size:15px;color:var(--navy)}
+.topic-meta{font-size:11px;color:var(--text2);margin-top:3px;font-family:'Share Tech Mono',monospace}
 .topic-arrow{font-size:16px;transition:transform .2s}
 .topic-item:hover .topic-arrow{transform:translateX(4px)}
-.ai-note{margin-top:16px;padding:14px 18px;background:var(--surface);border:1px solid var(--border);border-radius:10px;font-size:13px;color:var(--muted);box-shadow:var(--sh)}
+.ai-note{margin-top:16px;padding:13px 17px;background:var(--teal-l);border:1px solid var(--teal-m);border-radius:10px;font-size:13px;color:var(--teal)}
+.placeholder-state{text-align:center;padding:60px 0;color:var(--text2)}
 
 /* LAB */
 #lab{height:100vh;flex-direction:column;background:var(--bg)}
-.lab-header{padding:12px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;background:var(--surface);flex-shrink:0;position:relative;box-shadow:var(--sh);z-index:10}
+.lab-header{padding:10px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;background:var(--surface);flex-shrink:0;position:relative;box-shadow:var(--shadow);flex-wrap:wrap}
 .lab-accent{position:absolute;bottom:0;left:0;right:0;height:2px}
 .lab-info{display:flex;align-items:center;gap:10px}
 .lab-icon{font-size:18px}
-.lab-topic-wrap .lab-topic{font-weight:700;font-size:14px;color:var(--text)}
-.lab-topic-wrap .lab-tag{font-size:10px;font-family:'Share Tech Mono',monospace;letter-spacing:1px}
-.lab-meta{margin-left:auto;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.xcount{font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--muted)}
+.lab-topic{font-weight:700;font-size:14px;color:var(--navy);max-width:180px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lab-tag{font-size:10px;font-family:'Share Tech Mono',monospace;letter-spacing:1px}
+.lab-meta{margin-left:auto;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.diff-badge{font-family:'Share Tech Mono',monospace;font-size:10px;padding:3px 10px;border-radius:20px;border:1px solid;font-weight:700}
+.timer-box{display:flex;align-items:center;gap:5px;background:var(--gold-l);border:1px solid #FDE68A;border-radius:8px;padding:4px 10px;font-family:'Share Tech Mono',monospace;font-size:12px;color:var(--gold);font-weight:700}
+.xcount{font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--text2)}
 .xcount span{color:var(--teal);font-weight:700}
-.timer-wrap{display:flex;align-items:center;gap:5px;background:var(--teal-bg);border:1px solid rgba(13,148,136,.2);border-radius:6px;padding:4px 10px}
-.timer-icon{font-size:12px}
-#timer-display{font-family:'Share Tech Mono',monospace;font-size:13px;font-weight:600;color:var(--teal);min-width:42px}
-.btn-notes{background:var(--surface2);border:1px solid var(--border);color:var(--muted);padding:5px 11px;border-radius:6px;cursor:pointer;font-family:'Share Tech Mono',monospace;font-size:10px;transition:all .2s;position:relative}
+.session-pill{display:flex;align-items:center;gap:5px;background:var(--teal-l);border:1px solid var(--teal-m);border-radius:20px;padding:4px 10px;font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--teal)}
+.session-pill::before{content:'';display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--teal);animation:pulse 2s infinite}
+.btn-hdr{background:var(--surface2);border:1px solid var(--border);color:var(--text2);padding:5px 10px;border-radius:7px;cursor:pointer;font-family:'Share Tech Mono',monospace;font-size:10px;transition:all .2s;font-weight:600}
+.btn-hdr:hover{border-color:var(--teal);color:var(--teal)}
+.btn-end{background:var(--surface2);border:1px solid var(--red);color:var(--red);padding:5px 10px;border-radius:7px;cursor:pointer;font-family:'Share Tech Mono',monospace;font-size:10px;transition:all .2s;font-weight:600}
+.btn-end:hover{background:var(--red);color:#fff}
+.btn-notes{background:var(--surface2);border:1px solid var(--border);color:var(--text2);padding:5px 10px;border-radius:7px;cursor:pointer;font-family:'Share Tech Mono',monospace;font-size:10px;transition:all .2s;font-weight:600}
 .btn-notes:hover{border-color:var(--teal);color:var(--teal)}
-#notes-dot{display:none;position:absolute;top:-3px;right:-3px;width:8px;height:8px;border-radius:50%;background:var(--gold);border:2px solid var(--surface)}
-.btn-sm{background:var(--surface2);border:1px solid var(--border);color:var(--muted);padding:5px 11px;border-radius:6px;cursor:pointer;font-family:'Share Tech Mono',monospace;font-size:10px;transition:all .2s}
-.btn-sm:hover{border-color:var(--navy);color:var(--navy)}
-.btn-end{background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.2);color:#EF4444;padding:5px 11px;border-radius:6px;cursor:pointer;font-family:'Share Tech Mono',monospace;font-size:10px;transition:all .2s}
-.btn-end:hover{background:rgba(239,68,68,.12)}
-.session-live{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted);display:flex;align-items:center;gap:4px}
-.session-live::before{content:'';display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--teal);animation:pulse 2s infinite}
-.chat-area{flex:1;overflow-y:auto;padding:20px 24px;scroll-behavior:smooth;background:var(--bg)}
-.loading-state{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;min-height:200px;color:var(--muted);gap:14px}
-.spinner{width:28px;height:28px;border:2px solid var(--border);border-top-color:var(--teal);border-radius:50%;animation:spin .9s linear infinite}
-.loading-text{font-family:'Share Tech Mono',monospace;font-size:13px;color:var(--muted)}
-.message{display:flex;gap:12px;align-items:flex-start;margin:12px 0;animation:slideIn .3s ease}
+
+.lab-body{flex:1;display:flex;overflow:hidden}
+.chat-wrap{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.chat-area{flex:1;overflow-y:auto;padding:18px 22px;background:var(--bg)}
+
+.notes-panel{width:260px;flex-shrink:0;display:none;flex-direction:column;border-left:1px solid var(--border);background:var(--surface)}
+.notes-hdr{padding:10px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.notes-hdr span{font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--teal);letter-spacing:2px;font-weight:600}
+.notes-actions{display:flex;gap:6px}
+.notes-act{background:none;border:1px solid var(--border);color:var(--text2);padding:3px 9px;border-radius:5px;cursor:pointer;font-family:'Share Tech Mono',monospace;font-size:10px;transition:all .2s}
+.notes-act:hover{border-color:var(--teal);color:var(--teal)}
+#notes-input{flex:1;border:none;outline:none;padding:14px;font-family:'Share Tech Mono',monospace;font-size:12px;line-height:1.6;color:var(--text);background:var(--surface);resize:none}
+#notes-input::placeholder{color:var(--text2)}
+
+.loading-state{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:var(--text2);gap:14px}
+.spinner{width:28px;height:28px;border:2px solid var(--border);border-top-color:var(--teal);border-radius:50%;animation:spin .8s linear infinite}
+.loading-text{font-family:'Share Tech Mono',monospace;font-size:13px;color:var(--text2)}
+.ld span{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--teal);animation:dot 1.4s infinite;margin:0 2px}
+.ld span:nth-child(2){animation-delay:.2s}.ld span:nth-child(3){animation-delay:.4s}
+
+.message{display:flex;gap:10px;align-items:flex-start;margin:10px 0;animation:slideIn .25s ease}
 .message.user{flex-direction:row-reverse}
 .msg-av{width:32px;height:32px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:'Share Tech Mono',monospace}
-.msg-av.ai{background:var(--teal);color:#fff}
-.msg-av.user{background:var(--navy);color:#fff}
-.msg-body{max-width:76%;display:flex;flex-direction:column;gap:4px}
+.msg-av.ai{background:var(--teal);color:#fff}.msg-av.user{background:var(--navy);color:#fff}
+.msg-body{max-width:76%;display:flex;flex-direction:column;gap:3px}
 .message.user .msg-body{align-items:flex-end}
-.msg-bub{padding:12px 16px;font-size:14px;line-height:1.75;border-radius:12px}
-.msg-bub.ai{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--teal);border-radius:4px 12px 12px 12px;font-family:'Share Tech Mono',monospace;font-size:12.5px;color:var(--text2);box-shadow:var(--sh)}
-.msg-bub.user{background:var(--navy);color:#fff;border-radius:12px 4px 12px 12px;font-family:'Rajdhani',sans-serif;font-size:15px;font-weight:500}
+.msg-bub{padding:12px 16px;font-size:14px;line-height:1.7;border-radius:12px}
+.msg-bub.ai{background:var(--surface);border:1px solid var(--border);border-radius:4px 12px 12px 12px;font-family:'Share Tech Mono',monospace;font-size:13px;color:var(--text);box-shadow:var(--shadow)}
+.msg-bub.user{background:var(--navy);border-radius:12px 4px 12px 12px;font-family:'Rajdhani',sans-serif;font-size:15px;font-weight:500;color:#fff}
 .msg-bub strong{color:var(--teal);font-weight:700}
-.msg-bub.user strong{color:#4DD9CC}
-.msg-bub em{color:var(--gold);font-style:italic}
-.msg-bub h3{color:var(--navy);font-size:13px;margin:10px 0 5px;font-family:'Rajdhani',sans-serif;font-weight:700}
-.msg-bub.ai h3{color:var(--navy)}
-.msg-bub ul,.msg-bub ol{padding-left:16px;margin:6px 0}
+.msg-bub em{color:var(--gold)}
+.msg-bub h3{font-size:14px;margin:10px 0 5px;font-family:'Rajdhani',sans-serif;font-weight:700;color:var(--navy)}
+.msg-bub.user h3{color:#fff}
+.msg-bub ul,.msg-bub ol{padding-left:18px;margin:6px 0}
 .msg-bub li{margin:3px 0}
 .msg-bub hr{border:none;border-top:1px solid var(--border);margin:10px 0}
-.msg-time{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted);padding:0 4px}
-.quick-actions{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 4px 44px}
-.quick-btn{background:var(--surface);border:1px solid var(--border);color:var(--muted);padding:5px 12px;border-radius:6px;cursor:pointer;font-family:'Share Tech Mono',monospace;font-size:11px;transition:all .2s;box-shadow:var(--sh)}
-.quick-btn:hover{border-color:var(--teal);color:var(--teal);background:var(--teal-bg)}
-.typing-dots span{display:inline-block;width:6px;height:6px;background:var(--teal);border-radius:50%;animation:dot 1.4s infinite;margin:0 2px;opacity:.6}
-.typing-dots span:nth-child(2){animation-delay:.2s}
-.typing-dots span:nth-child(3){animation-delay:.4s}
-.err-msg{background:rgba(239,68,68,.05);border:1px solid rgba(239,68,68,.2);border-radius:10px;padding:12px 16px;margin:8px 0;color:#DC2626;font-family:'Share Tech Mono',monospace;font-size:12px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-.btn-retry{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);color:#DC2626;padding:5px 12px;border-radius:5px;cursor:pointer;font-family:'Share Tech Mono',monospace;font-size:11px;transition:all .2s;white-space:nowrap}
-.btn-retry:hover{background:rgba(239,68,68,.15)}
-.input-area{border-top:1px solid var(--border);padding:14px 20px;background:var(--surface);flex-shrink:0;box-shadow:0 -2px 8px rgba(11,37,69,.06)}
-.input-row{display:flex;gap:10px;align-items:flex-end;max-width:920px;margin:0 auto}
-#chat-input{flex:1;background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:11px 14px;border-radius:10px;outline:none;font-family:'Share Tech Mono',monospace;font-size:13px;line-height:1.6;resize:none;transition:border-color .2s,box-shadow .2s;min-height:46px;max-height:160px;overflow-y:auto}
+.msg-time{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--text2);padding:0 3px}
+
+.quick-actions{display:flex;gap:7px;flex-wrap:wrap;margin:8px 0 4px 42px}
+.quick-btn{background:var(--surface);border:1px solid var(--border);color:var(--text2);padding:5px 12px;border-radius:20px;cursor:pointer;font-family:'Share Tech Mono',monospace;font-size:11px;transition:all .2s;box-shadow:var(--shadow)}
+.quick-btn:hover{border-color:var(--teal);color:var(--teal);background:var(--teal-l)}
+.typing-dots span{display:inline-block;width:6px;height:6px;background:var(--teal);border-radius:50%;animation:dot 1.4s infinite;margin:0 2px}
+.typing-dots span:nth-child(2){animation-delay:.2s}.typing-dots span:nth-child(3){animation-delay:.4s}
+.err-msg{background:#FFF5F5;border:1px solid #FECACA;border-radius:10px;padding:11px 15px;margin:8px 0;color:#B91C1C;font-family:'Share Tech Mono',monospace;font-size:12px;display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.btn-retry{background:var(--red);border:none;color:#fff;padding:5px 12px;border-radius:6px;cursor:pointer;font-family:'Share Tech Mono',monospace;font-size:11px;white-space:nowrap;flex-shrink:0}
+
+/* COMPLETION CARD */
+.complete-card{background:var(--surface);border:2px solid var(--teal);border-radius:16px;padding:28px;margin:16px 0;text-align:center;animation:popIn .4s ease;box-shadow:var(--shadow-lg)}
+.cc-icon{width:52px;height:52px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;font-size:26px;margin:0 auto 14px}
+.cc-title{font-size:24px;font-weight:700;color:var(--navy);margin-bottom:5px}
+.cc-meta{font-family:'Share Tech Mono',monospace;font-size:12px;color:var(--text2);margin-bottom:20px}
+.cc-feedback{background:var(--surface2);border-radius:12px;padding:16px;margin-bottom:18px}
+.fb-prompt{font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--text2);letter-spacing:1px;margin-bottom:12px;font-weight:600}
+.fb-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.fb-btn{background:var(--surface);border:1px solid var(--border);color:var(--text);padding:8px 18px;border-radius:8px;cursor:pointer;font-size:14px;font-family:'Rajdhani',sans-serif;font-weight:600;transition:all .2s;box-shadow:var(--shadow)}
+.fb-btn:hover{border-color:var(--teal);background:var(--teal-l);color:var(--teal)}
+.fb-thanks{font-family:'Share Tech Mono',monospace;font-size:13px;color:var(--teal);font-weight:600}
+.cc-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.cc-btn{padding:10px 20px;border-radius:8px;cursor:pointer;font-family:'Share Tech Mono',monospace;font-size:11px;font-weight:700;letter-spacing:1px;transition:all .2s;background:var(--teal);color:#fff;border:2px solid var(--teal)}
+.cc-btn:hover{background:#0A7A70;transform:translateY(-1px)}
+.cc-outline{background:transparent;color:var(--teal)}.cc-outline:hover{background:var(--teal-l)}
+
+/* INPUT */
+.input-area{border-top:1px solid var(--border);padding:12px 18px;background:var(--surface);flex-shrink:0}
+.input-row{display:flex;gap:10px;align-items:flex-end;max-width:900px;margin:0 auto}
+#chat-input{flex:1;background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:11px 14px;border-radius:10px;outline:none;font-family:'Share Tech Mono',monospace;font-size:13px;line-height:1.6;resize:none;transition:all .2s;min-height:46px;max-height:160px;overflow-y:auto}
 #chat-input:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(13,148,136,.1)}
-#chat-input::placeholder{color:var(--muted)}
-#chat-input:disabled{opacity:.5;cursor:not-allowed;background:var(--bg)}
-#send-btn{background:var(--border);border:none;color:var(--muted);padding:0 20px;border-radius:10px;cursor:not-allowed;font-family:'Share Tech Mono',monospace;font-size:12px;font-weight:700;letter-spacing:1px;height:46px;transition:all .2s;white-space:nowrap}
-#send-btn.ready{background:var(--teal);color:#fff;cursor:pointer;box-shadow:0 2px 12px rgba(13,148,136,.3)}
-#send-btn.ready:hover{background:#0AA899;transform:translateY(-1px)}
-.input-footer{text-align:center;margin-top:8px;font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:.5px}
+#chat-input::placeholder{color:var(--text2)}
+#chat-input:disabled{opacity:.5;cursor:not-allowed}
+#send-btn{background:var(--border);border:none;color:var(--text2);padding:0 18px;border-radius:10px;cursor:not-allowed;font-family:'Share Tech Mono',monospace;font-size:12px;font-weight:700;letter-spacing:1px;height:46px;transition:all .2s;white-space:nowrap}
+#send-btn.ready{background:var(--teal);color:#fff;cursor:pointer;box-shadow:0 2px 10px rgba(13,148,136,.3)}
+#send-btn.ready:hover{background:#0A7A70;transform:translateY(-1px)}
+.input-footer{text-align:center;margin-top:7px;font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--text2);letter-spacing:.5px}
 
-/* NOTES PANEL */
-.notes-panel{position:fixed;top:0;right:0;bottom:0;width:320px;background:var(--surface);border-left:1px solid var(--border);box-shadow:-4px 0 24px rgba(11,37,69,.12);transform:translateX(100%);transition:transform .3s ease;z-index:200;display:flex;flex-direction:column}
-.notes-panel.open{transform:translateX(0)}
-.notes-header{padding:16px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
-.notes-title{font-family:'Share Tech Mono',monospace;font-size:12px;color:var(--teal);letter-spacing:2px;font-weight:700}
-.notes-actions{display:flex;gap:8px}
-.btn-note-action{background:none;border:1px solid var(--border);color:var(--muted);padding:4px 10px;border-radius:5px;cursor:pointer;font-family:'Share Tech Mono',monospace;font-size:10px;transition:all .2s}
-.btn-note-action:hover{border-color:var(--navy);color:var(--navy)}
-#notes-input{flex:1;border:none;outline:none;padding:16px 18px;font-family:'Rajdhani',sans-serif;font-size:14px;line-height:1.7;color:var(--text);resize:none;background:var(--surface2)}
-#notes-input::placeholder{color:var(--muted);font-style:italic}
-.notes-footer{padding:10px 18px;border-top:1px solid var(--border);font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted)}
+/* HISTORY MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(15,23,42,.5);z-index:100;display:flex;align-items:center;justify-content:center;padding:20px;animation:modalIn .2s ease;backdrop-filter:blur(2px)}
+.modal-box{background:var(--surface);border-radius:16px;width:100%;max-width:600px;max-height:80vh;display:flex;flex-direction:column;box-shadow:var(--shadow-lg);border:1px solid var(--border)}
+.modal-hdr{padding:18px 22px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.modal-title{font-size:18px;font-weight:700;color:var(--navy)}
+.modal-acts{display:flex;gap:8px}
+.modal-act{background:none;border:1px solid var(--border);color:var(--text2);padding:6px 12px;border-radius:7px;cursor:pointer;font-family:'Share Tech Mono',monospace;font-size:11px;transition:all .2s}
+.modal-act:hover{border-color:var(--red);color:var(--red)}
+.modal-close{background:none;border:1px solid var(--border);color:var(--text2);padding:6px 12px;border-radius:7px;cursor:pointer;font-family:'Share Tech Mono',monospace;font-size:11px;transition:all .2s}
+.modal-close:hover{border-color:var(--teal);color:var(--teal)}
+.modal-body{overflow-y:auto;flex:1;padding:0}
+.hist-stats{display:flex;gap:0;border-bottom:1px solid var(--border)}
+.hs-item{flex:1;text-align:center;padding:16px 12px;border-right:1px solid var(--border)}
+.hs-item:last-child{border-right:none}
+.hs-num{font-size:24px;font-weight:700;color:var(--teal);display:block;font-family:'Share Tech Mono',monospace}
+.hs-label{font-size:10px;color:var(--text2);letter-spacing:2px;font-family:'Share Tech Mono',monospace}
+.hist-entries{padding:8px 0}
+.hist-item{display:flex;align-items:center;gap:14px;padding:14px 22px;border-bottom:1px solid var(--border);transition:background .15s}
+.hist-item:last-child{border-bottom:none}
+.hist-item:hover{background:var(--surface2)}
+.hist-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.hist-info{flex:1}
+.hist-topic{font-weight:700;font-size:15px;color:var(--navy)}
+.hist-sub{font-size:12px;color:var(--text2);font-family:'Share Tech Mono',monospace;margin-top:2px}
+.hist-empty{text-align:center;padding:48px 24px;color:var(--text2)}
 
-/* COMPLETE */
-#complete{min-height:100vh;background:var(--bg);display:flex;align-items:center;justify-content:center;padding:24px}
-.comp-card{background:var(--surface);border-radius:20px;padding:48px 40px;max-width:520px;width:100%;text-align:center;box-shadow:var(--shl);border:1px solid var(--border)}
-.comp-emoji{font-size:56px;margin-bottom:16px}
-.comp-outcome{font-size:28px;font-weight:700;margin-bottom:6px}
-.comp-sub{color:var(--muted);font-size:14px;margin-bottom:28px}
-.comp-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px}
-.comp-stat{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:14px}
-.comp-stat-val{font-size:20px;font-weight:700;color:var(--navy);font-family:'Share Tech Mono',monospace}
-.comp-stat-label{font-size:11px;color:var(--muted);margin-top:4px;letter-spacing:1px}
-.comp-msg{background:var(--teal-bg);border:1px solid rgba(13,148,136,.2);border-radius:10px;padding:14px 18px;font-size:14px;color:var(--text2);margin-bottom:28px;line-height:1.6}
-.comp-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
-.btn-comp{padding:11px 24px;border-radius:8px;font-family:'Share Tech Mono',monospace;font-size:12px;letter-spacing:1px;cursor:pointer;transition:all .2s;border:1px solid var(--border);background:var(--surface);color:var(--text);font-weight:700}
-.btn-comp:hover{border-color:var(--teal);color:var(--teal)}
-.btn-comp.primary{background:var(--teal);color:#fff;border-color:var(--teal);box-shadow:0 2px 12px rgba(13,148,136,.3)}
-.btn-comp.primary:hover{background:#0AA899}
-
-@media(max-width:600px){
-  .hero-banner{padding:36px 24px}.hero-banner h1{font-size:26px}
-  .cards-grid{grid-template-columns:1fr}.stats-row{flex-wrap:wrap}
-  .msg-body{max-width:88%}.home-inner,.select-inner{padding:0 16px}
-  .chat-area{padding:14px}.input-area{padding:12px 14px}
-  .notes-panel{width:100%}.session-live{display:none}
-  .lab-meta{gap:6px}.comp-card{padding:32px 24px}
+@media(max-width:640px){
+  .hero h1{font-size:28px}.cards-grid{grid-template-columns:1fr}
+  .msg-body{max-width:88%}.stats-row{max-width:100%}
+  .notes-panel{display:none!important}.session-pill,.xcount{display:none}
+  .home-inner,.select-inner{padding:0 16px}.chat-area{padding:12px}.input-area{padding:10px 12px}
+  .lab-topic{max-width:110px}.top-bar{gap:8px}
 }
-
 </style>
 </head>
 <body>
@@ -203,41 +248,52 @@ body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;mi
         <div class="logo-icon">&#128274;</div>
         <div><div class="logo-sub">KULAN INSTITUTE</div><div class="logo-title">CYBER LAB</div></div>
       </div>
-      <div class="ai-badge"><div class="ai-dot"></div>AI ONLINE</div>
+      <div class="top-actions">
+        <button id="hist-btn" class="hist-btn" onclick="openHistory()">&#128203; History</button>
+        <div class="ai-badge"><div class="ai-dot"></div>AI ONLINE</div>
+      </div>
     </div>
-    <div class="hero-banner">
+    <div class="hero">
       <div class="hero-tag">// INTERACTIVE CYBERSECURITY TRAINING ENVIRONMENT</div>
       <h1>Learn by <span class="t">Breaking</span> &amp; <span class="g">Defending</span></h1>
-      <p>AI-powered labs covering CTF challenges, real-world attack simulations, and Security+ SY0-701 exam prep. Every session is unique. No setup required.</p>
+      <p>AI-powered labs covering CTF challenges, real-world simulations, and Security+ SY0-701 exam prep. Every session is unique and has a defined end.</p>
       <button class="btn-primary" onclick="showScreen('select')">ENTER LAB &rarr;</button>
     </div>
     <div class="stats-row">
       <div class="stat"><span class="stat-num">3</span><span class="stat-label">LAB TYPES</span></div>
       <div class="stat"><span class="stat-num">15</span><span class="stat-label">TOPICS</span></div>
-      <div class="stat"><span class="stat-num">3</span><span class="stat-label">DIFFICULTIES</span></div>
       <div class="stat"><span class="stat-num">&infin;</span><span class="stat-label">SESSIONS</span></div>
     </div>
     <div class="cards-grid">
-      <div class="mode-card" onclick="goMode('ctf')" onmouseover="this.style.borderColor='#0D9488';this.style.boxShadow='0 8px 32px rgba(13,148,136,.15)'" onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='var(--sh)'">
-        <div class="card-icon">&#127937;</div>
-        <div class="card-title" style="color:#0D9488">CTF Challenges</div>
-        <div class="card-desc">Capture-the-Flag puzzles with real encoded data, logs, and clues. Includes timer. Request hints, submit your flag, get instant feedback.</div>
-        <div class="card-tags"><span class="card-tag" style="color:#0D9488;border-color:#0D9488">Crypto</span><span class="card-tag" style="color:#0D9488;border-color:#0D9488">Web Exploit</span><span class="card-tag" style="color:#0D9488;border-color:#0D9488">OSINT</span></div>
+      <div class="mode-card" onclick="goMode('ctf')" onmouseover="this.style.borderColor='#0D9488'" onmouseout="this.style.borderColor='var(--border)'">
+        <div class="card-top"><div class="card-icon-wrap" style="background:#F0FDFA">&#127937;</div><div class="card-title">CTF Challenges</div></div>
+        <div class="card-desc">Solve Capture-the-Flag puzzles with real encoded data. Timed, hinted, and auto-scored. Ends when you crack the flag.</div>
+        <div class="card-tags">
+          <span class="card-tag" style="color:#0D9488;border-color:#0D9488;background:#F0FDFA">Crypto</span>
+          <span class="card-tag" style="color:#0D9488;border-color:#0D9488;background:#F0FDFA">Web Exploit</span>
+          <span class="card-tag" style="color:#0D9488;border-color:#0D9488;background:#F0FDFA">OSINT</span>
+        </div>
       </div>
-      <div class="mode-card" onclick="goMode('simulation')" onmouseover="this.style.borderColor='#D97706';this.style.boxShadow='0 8px 32px rgba(217,119,6,.15)'" onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='var(--sh)'">
-        <div class="card-icon">&#9889;</div>
-        <div class="card-title" style="color:#D97706">Guided Simulations</div>
-        <div class="card-desc">Make decisions in a branching real-world scenario. Every choice has consequences. Full debrief and completion screen at the end.</div>
-        <div class="card-tags"><span class="card-tag" style="color:#D97706;border-color:#D97706">Phishing</span><span class="card-tag" style="color:#D97706;border-color:#D97706">Incident Response</span><span class="card-tag" style="color:#D97706;border-color:#D97706">Malware</span></div>
+      <div class="mode-card" onclick="goMode('simulation')" onmouseover="this.style.borderColor='#D97706'" onmouseout="this.style.borderColor='var(--border)'">
+        <div class="card-top"><div class="card-icon-wrap" style="background:#FFFBEB">&#9889;</div><div class="card-title">Guided Simulations</div></div>
+        <div class="card-desc">Make decisions across 5 branching decision points in a real attack or defense scenario. Full debrief at the end.</div>
+        <div class="card-tags">
+          <span class="card-tag" style="color:#D97706;border-color:#D97706;background:#FFFBEB">Phishing</span>
+          <span class="card-tag" style="color:#D97706;border-color:#D97706;background:#FFFBEB">Incident Response</span>
+          <span class="card-tag" style="color:#D97706;border-color:#D97706;background:#FFFBEB">Malware</span>
+        </div>
       </div>
-      <div class="mode-card" onclick="goMode('secplus')" onmouseover="this.style.borderColor='#7C3AED';this.style.boxShadow='0 8px 32px rgba(124,58,237,.15)'" onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='var(--sh)'">
-        <div class="card-icon">&#128737;</div>
-        <div class="card-title" style="color:#7C3AED">Security+ Labs</div>
-        <div class="card-desc">Structured exercises mapped to CompTIA SY0-701 objectives. Complete tasks, answer Q1-Q3, get graded feedback and exam tips.</div>
-        <div class="card-tags"><span class="card-tag" style="color:#7C3AED;border-color:#7C3AED">SY0-701</span><span class="card-tag" style="color:#7C3AED;border-color:#7C3AED">All 5 Domains</span><span class="card-tag" style="color:#7C3AED;border-color:#7C3AED">Exam Tips</span></div>
+      <div class="mode-card" onclick="goMode('secplus')" onmouseover="this.style.borderColor='#7C3AED'" onmouseout="this.style.borderColor='var(--border)'">
+        <div class="card-top"><div class="card-icon-wrap" style="background:#EDE9FE">&#128737;</div><div class="card-title">Security+ Labs</div></div>
+        <div class="card-desc">Structured exercises mapped to SY0-701 objectives. Complete 5 tasks, answer 3 questions, get graded with exam tips.</div>
+        <div class="card-tags">
+          <span class="card-tag" style="color:#7C3AED;border-color:#7C3AED;background:#EDE9FE">SY0-701</span>
+          <span class="card-tag" style="color:#7C3AED;border-color:#7C3AED;background:#EDE9FE">All 5 Domains</span>
+          <span class="card-tag" style="color:#7C3AED;border-color:#7C3AED;background:#EDE9FE">Exam Tips</span>
+        </div>
       </div>
     </div>
-    <div class="footer-tag">kulaninstitute.org &middot; mmohamud.me &middot; Powered by Claude AI</div>
+    <div class="home-footer">kulaninstitute.org &middot; mmohamud.me &middot; Powered by Claude AI</div>
   </div>
 </div>
 
@@ -245,13 +301,12 @@ body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;mi
 <div id="select" class="screen">
   <div class="select-inner">
     <div class="select-topbar">
-      <button class="btn-ghost" onclick="showScreen('home')">&larr; BACK</button>
-      <div class="select-label">SELECT MODE &rsaquo; DIFFICULTY &rsaquo; TOPIC</div>
+      <button class="btn-ghost" onclick="showScreen('home')">&larr; Back</button>
+      <div class="select-label">SELECT LAB MODE</div>
     </div>
     <div class="mode-tabs" id="mode-tabs"></div>
-    <div id="diff-wrap"></div>
     <div id="select-content">
-      <div style="text-align:center;padding:60px 0;color:var(--muted)">
+      <div class="placeholder-state">
         <div style="font-size:40px;margin-bottom:14px">&#128274;</div>
         <p style="font-family:'Share Tech Mono',monospace;font-size:13px">Select a lab mode above to continue</p>
       </div>
@@ -262,70 +317,61 @@ body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;mi
 <!-- LAB -->
 <div id="lab" class="screen">
   <div class="lab-header">
-    <button class="btn-ghost" onclick="exitLab()">&larr; EXIT</button>
+    <button class="btn-ghost" onclick="exitLab()" style="font-size:10px">&larr; Exit</button>
     <div class="lab-info">
       <div class="lab-icon" id="lab-icon">&#127937;</div>
-      <div class="lab-topic-wrap">
+      <div>
         <div class="lab-topic" id="lab-topic">Topic</div>
         <div class="lab-tag" id="lab-tag">MODE</div>
       </div>
     </div>
-    <div id="diff-badge"></div>
     <div class="lab-meta">
-      <div class="timer-wrap" id="timer-wrap" style="display:none">
-        <div class="timer-icon">&#9201;</div>
-        <div id="timer-display">20:00</div>
-      </div>
+      <div class="diff-badge" id="diff-badge">Intermediate</div>
+      <div class="timer-box" id="timer-container" style="display:none">&#9201; <span id="timer-display">00:00</span></div>
       <div class="xcount" id="xc" style="display:none"><span id="xn">0</span> exchanges</div>
-      <button class="btn-notes" id="notes-btn" onclick="toggleNotes()">&#128203; NOTES<span id="notes-dot"></span></button>
-      <button class="btn-sm" id="rbtn" onclick="restartLab()" style="display:none">&#8635; RESTART</button>
-      <button class="btn-end" id="end-btn" onclick="endSession('ended')" style="display:none">END SESSION</button>
-      <div class="session-live">LIVE</div>
+      <button class="btn-notes" id="notes-btn" onclick="toggleNotes()">&#128221; Notes</button>
+      <button class="btn-hdr" id="rbtn" onclick="restartLab()" style="display:none">&#8635; Restart</button>
+      <button class="btn-end" id="end-btn" onclick="endLab()" style="display:none">End Lab</button>
+      <div class="session-pill">LIVE</div>
     </div>
     <div class="lab-accent" id="lab-line"></div>
   </div>
-  <div class="chat-area" id="chat"></div>
-  <div class="input-area">
-    <div class="input-row">
-      <textarea id="chat-input" placeholder="Waiting for lab to load..." disabled rows="1"></textarea>
-      <button id="send-btn" onclick="sendMsg()" disabled>SEND &rarr;</button>
-    </div>
-    <div class="input-footer">kulaninstitute.org &middot; mmohamud.me &middot; Powered by Claude AI &nbsp;|&nbsp; Shift+Enter for new line</div>
-  </div>
-  <!-- NOTES PANEL -->
-  <div class="notes-panel" id="notes-panel">
-    <div class="notes-header">
-      <div class="notes-title">&#128203; SCRATCH PAD</div>
-      <div class="notes-actions">
-        <button class="btn-note-action" onclick="clearNotes()">CLEAR</button>
-        <button class="btn-note-action" onclick="toggleNotes()">CLOSE</button>
+  <div class="lab-body">
+    <div class="chat-wrap">
+      <div class="chat-area" id="chat"></div>
+      <div class="input-area">
+        <div class="input-row">
+          <textarea id="chat-input" placeholder="Waiting for lab to load..." disabled rows="1"></textarea>
+          <button id="send-btn" onclick="sendMsg()" disabled>SEND &rarr;</button>
+        </div>
+        <div class="input-footer">kulaninstitute.org &middot; mmohamud.me &middot; Powered by Claude AI &nbsp;|&nbsp; Shift+Enter for new line</div>
       </div>
     </div>
-    <textarea id="notes-input" placeholder="Jot down notes, suspicious strings, ideas, flags to try..."></textarea>
-    <div class="notes-footer">Auto-saved to your browser</div>
+    <div class="notes-panel" id="notes-panel">
+      <div class="notes-hdr">
+        <span>NOTES</span>
+        <div class="notes-actions">
+          <button class="notes-act" id="copy-notes-btn" onclick="copyNotes()">Copy</button>
+          <button class="notes-act" onclick="clearNotes()">Clear</button>
+          <button class="notes-act" onclick="toggleNotes()">&#10005;</button>
+        </div>
+      </div>
+      <textarea id="notes-input" placeholder="Jot down your findings, encoded strings, and ideas here..."></textarea>
+    </div>
   </div>
 </div>
 
-<!-- COMPLETE -->
-<div id="complete" class="screen">
-  <div class="comp-card">
-    <div class="comp-emoji" id="comp-emoji">&#10004;</div>
-    <div class="comp-outcome" id="comp-outcome">Completed</div>
-    <div class="comp-sub" id="comp-sub">
-      <span id="comp-mode">Mode</span> &middot; <span id="comp-diff" style="font-weight:700">Intermediate</span>
+<!-- HISTORY MODAL -->
+<div id="hist-modal" class="modal-overlay" style="display:none">
+  <div class="modal-box">
+    <div class="modal-hdr">
+      <div class="modal-title">Lab History</div>
+      <div class="modal-acts">
+        <button class="modal-act" onclick="clearHistory()">Clear All</button>
+        <button class="modal-close" onclick="closeHistory()">&#10005; Close</button>
+      </div>
     </div>
-    <div class="comp-stats">
-      <div class="comp-stat"><div class="comp-stat-val" id="comp-time">0m 0s</div><div class="comp-stat-label">TIME TAKEN</div></div>
-      <div class="comp-stat"><div class="comp-stat-val" id="comp-xc">0</div><div class="comp-stat-label">EXCHANGES</div></div>
-    </div>
-    <div style="font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:10px;letter-spacing:1px">TOPIC</div>
-    <div style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:20px" id="comp-topic">Topic</div>
-    <div class="comp-msg" id="comp-msg">Well done!</div>
-    <div class="comp-btns">
-      <button class="btn-comp" onclick="startLab(topic)">&#8635; Try Again</button>
-      <button class="btn-comp" onclick="showScreen('select')">New Lab</button>
-      <button class="btn-comp primary" onclick="showScreen('home')">&#127968; Home</button>
-    </div>
+    <div class="modal-body" id="hist-list"></div>
   </div>
 </div>
 
@@ -334,427 +380,664 @@ body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;mi
 var SUPA_URL = "https://xkadqvmqxdyqoddiypet.supabase.co/functions/v1/claude-proxy";
 var SUPA_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhrYWRxdm1xeGR5cW9kZGl5cGV0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNzI5NDMsImV4cCI6MjA4ODk0ODk0M30.FPBEXOx62vaTcLom7IkVRKRLda1xKk09slhQZ9yuRWc";
 
-function ctfPrompt(t, d) {
-  var dn = d === 'Beginner'
-    ? 'BEGINNER: use simple encoding (base64, ROT13). Give clear clues. Solution in 2-3 logical steps.'
-    : d === 'Advanced'
-    ? 'ADVANCED: complex multi-step encoding, real attack patterns, minimal clues. Genuine technical skill required.'
-    : 'INTERMEDIATE: moderate encoding complexity, standard CTF difficulty.';
-  return 'You are a CTF cybersecurity lab instructor. Difficulty: ' + dn + ' Topic: "' + t + '".'
-    + ' Structure your FIRST response with these exact bold headers:'
-    + ' **CHALLENGE BRIEFING** (2-3 immersive real-world sentences),'
-    + ' **OBJECTIVE** (exactly what to find),'
-    + ' **GIVEN INFORMATION** (real technical data: encoded strings, logs, hex, code snippets - make it genuinely solvable),'
-    + ' **HINTS** (Hint 1 and Hint 2 hidden until asked),'
-    + ' **SUBMIT YOUR FLAG** (format: FLAG{answer}).'
-    + ' When student submits the CORRECT flag respond with "CORRECT! FLAG CAPTURED!" and explain the full solution.'
-    + ' If wrong give a nudge. Reveal hints one at a time when asked.';
+var DIFF_COLORS = { beginner:"#10B981", intermediate:"#D97706", advanced:"#EF4444" };
+var selectedDiff = "intermediate";
+var modeKey = null;
+
+function diffNote() {
+  if (selectedDiff === "beginner") return " The student is a BEGINNER: be very supportive, explain all concepts clearly, offer proactive hints, keep it approachable.";
+  if (selectedDiff === "advanced") return " The student is ADVANCED: be very challenging, minimal handholding, expect precise technical answers, do not volunteer hints.";
+  return " The student is INTERMEDIATE: moderate challenge, some guidance available on request.";
 }
 
-function simPrompt(t, d) {
-  var pts = d === 'Beginner' ? 3 : d === 'Advanced' ? 5 : 4;
-  var dn = d === 'Beginner'
-    ? 'BEGINNER: guide clearly, explain consequences simply. ' + pts + ' decision points.'
-    : d === 'Advanced'
-    ? 'ADVANCED: minimal guidance, harsh realistic consequences. ' + pts + ' decision points. Complex multi-system scenario.'
-    : 'INTERMEDIATE: standard difficulty. ' + pts + ' decision points.';
-  return 'You are a cybersecurity simulation instructor. Difficulty: ' + dn + ' Scenario: "' + t + '".'
-    + ' Structure your FIRST response with:'
-    + ' **SCENARIO BRIEFING** (2-3 immersive high-stakes sentences),'
-    + ' **YOUR ROLE** (who the student is and their responsibilities),'
-    + ' **CURRENT SITUATION** (rich technical detail: IPs timestamps logs alerts),'
-    + ' **DECISION POINT 1 of ' + pts + '** (3 numbered realistic options).'
-    + ' After each choice: show realistic consequences, update situation, present next decision point.'
-    + ' After decision point ' + pts + ' write a **DEBRIEF** with the optimal path, cost of wrong choices, and key lesson.'
-    + ' At the very end of the debrief on its own line write exactly: SESSION COMPLETE';
+function ctfPrompt(t) {
+  return "You are a CTF cybersecurity instructor. Lab topic: \"" + t + "\"." + diffNote()
+    + "\n\nStructure your FIRST response with these exact bold headers:"
+    + "\n\n**CHALLENGE BRIEFING**\n[2-3 immersive sentences]"
+    + "\n\n**OBJECTIVE**\n[What the student must find]"
+    + "\n\n**GIVEN INFORMATION**\n[Real technical data: encoded strings, logs, hex, packets. Make it genuinely solvable.]"
+    + "\n\n**HINTS**\n- Hint 1: type Hint 1 to reveal\n- Hint 2: type Hint 2 to reveal"
+    + "\n\n**SUBMIT YOUR FLAG**\n[Format e.g. FLAG{answer}]"
+    + "\n\n---\nWhen the student submits the CORRECT flag: explain the full solution, teach the concept, then end with exactly: ===LAB COMPLETE===\nIf wrong: give a nudge. If hints requested: reveal one at a time.";
 }
 
-function secPrompt(t, d) {
-  var dn = d === 'Beginner'
-    ? 'BEGINNER: simpler scenario, clear task guidance, straightforward questions.'
-    : d === 'Advanced'
-    ? 'ADVANCED: complex enterprise environment, deep technical configs, challenging questions.'
-    : 'INTERMEDIATE: standard workplace scenario.';
-  return 'You are a CompTIA Security+ SY0-701 lab instructor. Difficulty: ' + dn + ' Domain: "' + t + '".'
-    + ' Structure your FIRST response with:'
-    + ' **LAB TITLE**,'
-    + ' **EXAM OBJECTIVE** (SY0-701 objective number and exact wording),'
-    + ' **SCENARIO** (realistic workplace with configs logs policy excerpts),'
-    + ' **YOUR TASKS** (5 specific actionable tasks),'
-    + ' **ANSWER THESE QUESTIONS** (Q1 Q2 Q3 tied to the scenario),'
-    + ' **EXAM TIP** (one concrete memory hook for the real exam).'
-    + ' After student answers: evaluate each answer clearly.'
-    + ' At the very end on its own line write exactly: LAB COMPLETE';
+function simPrompt(t) {
+  return "You are a cybersecurity simulation instructor. Scenario: \"" + t + "\"." + diffNote()
+    + "\n\nStructure your FIRST response:"
+    + "\n\n**SCENARIO BRIEFING**\n[2-3 immersive sentences]"
+    + "\n\n**YOUR ROLE**\n[Who the student is]"
+    + "\n\n**CURRENT SITUATION**\n[Technical detail: IPs, logs, alerts, emails]"
+    + "\n\n**DECISION POINT 1 of 5**\nWhat do you do?\n1. [Realistic action]\n2. [Realistic action]\n3. [Realistic action]"
+    + "\n\n---\nAfter each choice show consequences and next decision. After DECISION POINT 5 give a full DEBRIEF then end with exactly: ===LAB COMPLETE===";
+}
+
+function secPrompt(t) {
+  return "You are a CompTIA Security+ SY0-701 lab instructor. Topic: \"" + t + "\"." + diffNote()
+    + "\n\nStructure your response:"
+    + "\n\n**LAB TITLE**\n[Title]"
+    + "\n\n**EXAM OBJECTIVE**\n[SY0-701 objective number and wording]"
+    + "\n\n**SCENARIO**\n[Realistic workplace situation with configs/logs]"
+    + "\n\n**YOUR TASKS**\n1. [Task]\n2. [Task]\n3. [Task]\n4. [Task]\n5. [Task]"
+    + "\n\n**ANSWER THESE QUESTIONS**\nQ1: [Question]\nQ2: [Question]\nQ3: [Question]"
+    + "\n\n**EXAM TIP**\n[Memory hook for exam]"
+    + "\n\n---\nAfter student answers all questions: evaluate each clearly, then end with exactly: ===LAB COMPLETE===";
 }
 
 var MODES = {
   ctf: {
-    id:'ctf', label:'CTF Challenges', icon:'&#127937;', color:'#0D9488', bgColor:'#F0FDFA',
-    domains:['Cryptography','Web Exploitation','OSINT','Forensics','Reverse Engineering'],
-    actions:['Hint 1 please','Hint 2 please','Reveal the solution','I give up'],
-    timerMins:{Beginner:20,Intermediate:15,Advanced:10},
-    prompt:ctfPrompt
+    label:"CTF Challenges", iconHtml:"&#127937;", color:"#0D9488",
+    domains:["Cryptography","Web Exploitation","OSINT","Forensics","Reverse Engineering"],
+    actions:["Hint 1","Hint 2","Reveal the solution","New challenge"],
+    prompt:ctfPrompt, hasTimer:true
   },
   simulation: {
-    id:'simulation', label:'Guided Simulations', icon:'&#9889;', color:'#D97706', bgColor:'#FFFBEB',
-    domains:['Phishing Attack','Malware Analysis','Incident Response','Social Engineering','Network Intrusion'],
-    actions:['Option 1','Option 2','Option 3','Show current status'],
-    timerMins:null,
-    prompt:simPrompt
+    label:"Guided Simulations", iconHtml:"&#9889;", color:"#D97706",
+    domains:["Phishing Attack","Malware Analysis","Incident Response","Social Engineering","Network Intrusion"],
+    actions:["Option 1","Option 2","Option 3","Show debrief now"],
+    prompt:simPrompt, hasTimer:false
   },
   secplus: {
-    id:'secplus', label:'Security+ Labs', icon:'&#128737;', color:'#7C3AED', bgColor:'#F5F3FF',
-    domains:['Domain 1: General Security','Domain 2: Threats and Vulnerabilities','Domain 3: Security Architecture','Domain 4: Security Operations','Domain 5: Governance and Compliance'],
-    actions:['Check my answers','Hint on Q1','Hint on Q2','Explain this more'],
-    timerMins:null,
-    prompt:secPrompt
+    label:"Security+ Labs", iconHtml:"&#128737;", color:"#7C3AED",
+    domains:["Domain 1: General Security","Domain 2: Threats and Vulnerabilities","Domain 3: Security Architecture","Domain 4: Security Operations","Domain 5: Governance and Compliance"],
+    actions:["Check my answers","Hint on Q1","Hint on Q2","Explain this concept"],
+    prompt:secPrompt, hasTimer:false
   }
 };
 
-var mode=null, topic=null, diff='Intermediate';
-var msgs=[], ready=false, busy=false;
-var xc=0, lastTx=null, sessionDone=false;
-var timerSecs=0, timerInt=null, startTime=null;
-var maxX={Beginner:8,Intermediate:12,Advanced:16};
+var mode=null, topic=null, msgs=[], ready=false, busy=false;
+var xc=0, lastTx=null, labDone=false;
+var timerSec=0, timerInt=null;
+var notesOpen=false;
 
+/* -- NAVIGATION -- */
 function showScreen(id) {
-  var all=document.querySelectorAll('.screen');
-  for(var i=0;i<all.length;i++) all[i].classList.remove('active');
-  document.getElementById(id).classList.add('active');
-  if(id==='select') buildSelect();
+  var all=document.querySelectorAll(".screen");
+  for(var i=0;i<all.length;i++) all[i].classList.remove("active");
+  document.getElementById(id).classList.add("active");
+  if(id==="select") buildSelect();
+  if(id==="home") updateHistoryBtn();
 }
+function goMode(id) { modeKey=id; mode=MODES[id]; showScreen("select"); }
 
-function goMode(id){mode=MODES[id];showScreen('select');}
-
-function buildSelect(){
-  var keys=Object.keys(MODES),html='';
+/* -- SELECT -- */
+function buildSelect() {
+  var keys=Object.keys(MODES), html="";
   for(var i=0;i<keys.length;i++){
-    var k=keys[i],m=MODES[k];
-    html+='<button class="mode-tab" id="tab-'+k+'" onclick="pickMode(this.getAttribute(\'data-id\'))" data-id="'+k+'"'
-         +' style="border-color:'+m.color+';color:'+m.color+'">'+m.icon+' '+m.label.toUpperCase()+'</button>';
+    var k=keys[i], m=MODES[k];
+    html+="<button class=\"mode-tab\" id=\"tab-"+k+"\" onclick=\"pickMode(this.getAttribute('data-id'))\" data-id=\""+k+"\""
+        +" style=\"color:"+m.color+";border-color:"+m.color+"\">"+m.iconHtml+" "+m.label.toUpperCase()+"</button>";
   }
-  document.getElementById('mode-tabs').innerHTML=html;
-  if(mode){markTab();renderDiff();buildTopics();}
+  document.getElementById("mode-tabs").innerHTML=html;
+  if(mode){markTab();buildTopics();}
 }
-
-function pickMode(id){mode=MODES[id];markTab();renderDiff();buildTopics();}
-
-function renderDiff(){
-  var diffs=['Beginner','Intermediate','Advanced'],html='';
-  for(var i=0;i<diffs.length;i++){
-    var d=diffs[i],active=d===diff;
-    html+='<button class="diff-pill'+(active?' dpactive':'')+'" onclick="pickDiff(this.getAttribute(\'data-d\'))" data-d="'+d+'"'
-        +(active?' style="background:'+mode.color+';color:#fff;border-color:'+mode.color+'"':'')+'>'+d+'</button>';
-  }
-  document.getElementById('diff-wrap').innerHTML='<div class="diff-label">DIFFICULTY</div><div class="diff-pills">'+html+'</div>';
-}
-
-function pickDiff(d){diff=d;renderDiff();buildTopics();}
-
+function pickMode(id){modeKey=id;mode=MODES[id];markTab();buildTopics();}
 function markTab(){
   var keys=Object.keys(MODES);
   for(var i=0;i<keys.length;i++){
-    var k=keys[i],m=MODES[k],el=document.getElementById('tab-'+k);
+    var k=keys[i],m=MODES[k],el=document.getElementById("tab-"+k);
     if(!el) continue;
-    if(m===mode){el.style.background=m.color;el.style.color='#fff';}
-    else{el.style.background='transparent';el.style.color=m.color;}
+    if(m===mode){el.style.background=m.color;el.style.color="#fff";}
+    else{el.style.background="transparent";el.style.color=m.color;}
   }
 }
-
+function pickDiff(d){
+  selectedDiff=d;
+  var diffs=["beginner","intermediate","advanced"];
+  for(var i=0;i<diffs.length;i++){
+    var el=document.getElementById("diff-"+diffs[i]);
+    if(!el) continue;
+    if(diffs[i]===d){el.style.background=DIFF_COLORS[d];el.style.color="#fff";el.style.borderColor=DIFF_COLORS[d];}
+    else{el.style.background="transparent";el.style.color=DIFF_COLORS[diffs[i]];el.style.borderColor=DIFF_COLORS[diffs[i]];}
+  }
+  var rows=document.querySelectorAll(".topic-meta");
+  for(var j=0;j<rows.length;j++) rows[j].textContent="AI-generated \u00b7 "+capitalize(d)+" difficulty \u00b7 auto-ending";
+}
 function buildTopics(){
   var m=mode;
-  var desc=m.id==='ctf'
-    ?'Solve unique challenges with real encoded data. Request hints anytime. Capture the flag to win.'
-    :m.id==='simulation'
-    ?'Make decisions in a branching real-world scenario. Every choice has consequences. Full debrief at the end.'
-    :'Complete structured exercises mapped to SY0-701 objectives. Answer questions and get graded feedback.';
-  var rows='';
+  var desc=m.label.indexOf("CTF")>-1
+    ?"Solve unique challenges with real encoded data. Request hints anytime. Submit your flag to win."
+    :m.label.indexOf("Sim")>-1
+    ?"Make decisions across 5 branching decision points in a real-world scenario. Ends with full debrief."
+    :"Complete structured exercises mapped to SY0-701 objectives. Answer questions and get graded feedback.";
+  var rows="";
   for(var i=0;i<m.domains.length;i++){
     var t=m.domains[i];
-    rows+='<div class="topic-item" onclick="startLab(this.getAttribute(\'data-t\'))" data-t="'+t+'"'
-        +' onmouseover="this.style.borderColor=\''+m.color+'\';this.style.background=\''+m.bgColor+'\'"'
-        +' onmouseout="this.style.borderColor=\'var(--border)\';this.style.background=\'var(--surface)\'">'
-        +'<div><div class="topic-name">'+t+'</div>'
-        +'<div class="topic-meta">'+diff+' &middot; AI-generated &middot; interactive</div></div>'
-        +'<div class="topic-arrow" style="color:'+m.color+'">&rarr;</div></div>';
+    rows+="<div class=\"topic-item\" onclick=\"startLab(this.getAttribute('data-t'))\" data-t=\""+t+"\""
+        +" onmouseover=\"this.style.borderColor='"+m.color+"';this.style.background='"+m.color+"18'\""
+        +" onmouseout=\"this.style.borderColor='var(--border)';this.style.background='var(--surface)'\">"
+        +"<div><div class=\"topic-name\">"+t+"</div>"
+        +"<div class=\"topic-meta\">AI-generated \u00b7 "+capitalize(selectedDiff)+" difficulty \u00b7 auto-ending</div></div>"
+        +"<div class=\"topic-arrow\" style=\"color:"+m.color+"\">&rarr;</div></div>";
   }
-  document.getElementById('select-content').innerHTML=
-    '<div class="topic-header"><h2 style="color:'+m.color+'">'+m.icon+' '+m.label+'</h2><p>'+desc+'</p></div>'
-    +'<div class="topic-hint">SELECT A TOPIC TO BEGIN YOUR SESSION</div>'
-    +'<div class="topic-list">'+rows+'</div>'
-    +'<div class="ai-note"><span style="color:'+m.color+'">AI-Powered: </span>Each lab uniquely generated by Claude. No two sessions are identical.</div>';
+  document.getElementById("select-content").innerHTML=
+    "<div class=\"topic-header\"><h2 style=\"color:"+m.color+"\">"+m.iconHtml+" "+m.label+"</h2><p>"+desc+"</p></div>"
+    +"<div class=\"diff-row\">"
+    +"<span class=\"diff-label\">Difficulty:</span>"
+    +"<button id=\"diff-beginner\" class=\"diff-btn\" onclick=\"pickDiff('beginner')\" style=\"color:#10B981;border-color:#10B981\">Beginner</button>"
+    +"<button id=\"diff-intermediate\" class=\"diff-btn\" onclick=\"pickDiff('intermediate')\" style=\"background:#D97706;color:#fff;border-color:#D97706\">Intermediate</button>"
+    +"<button id=\"diff-advanced\" class=\"diff-btn\" onclick=\"pickDiff('advanced')\" style=\"color:#EF4444;border-color:#EF4444\">Advanced</button>"
+    +"</div>"
+    +"<div class=\"topic-hint\">// SELECT A TOPIC TO BEGIN</div>"
+    +"<div class=\"topic-list\">"+rows+"</div>"
+    +"<div class=\"ai-note\"><span style=\"color:"+m.color+"\">AI-Powered: </span>Each session uniquely generated by Claude. Labs end automatically when complete.</div>";
 }
 
+/* -- LAB -- */
 function startLab(t){
-  topic=t;msgs=[];ready=false;busy=true;xc=0;lastTx=null;sessionDone=false;startTime=new Date();
-  stopTimer();
-  document.getElementById('lab-icon').innerHTML=mode.icon;
-  document.getElementById('lab-topic').textContent=topic;
-  document.getElementById('lab-tag').textContent=mode.label.toUpperCase();
-  document.getElementById('lab-tag').style.color=mode.color;
-  document.getElementById('diff-badge').textContent=diff;
-  document.getElementById('diff-badge').style.cssText='background:'+mode.bgColor+';color:'+mode.color+';border:1px solid '+mode.color+';padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:1px;';
-  document.getElementById('xc').style.display='none';
-  document.getElementById('rbtn').style.display='none';
-  document.getElementById('end-btn').style.display='none';
-  document.getElementById('lab-line').style.background='linear-gradient(90deg,transparent,'+mode.color+',transparent)';
-  var tw=document.getElementById('timer-wrap');
-  if(mode.timerMins&&mode.timerMins[diff]){
-    timerSecs=mode.timerMins[diff]*60; tw.style.display='flex'; updateTimerDisplay();
-  } else { tw.style.display='none'; }
-  setInput(false,'Generating your lab...');
-  showScreen('lab'); loadNotes();
-  var chat=document.getElementById('chat');
-  chat.innerHTML='<div class="loading-state"><div class="spinner"></div><div class="loading-text">Generating your '+diff.toLowerCase()+' level lab...</div></div>';
-  ajax([{role:'user',content:'Start the lab.'}],function(reply,err){
-    chat.innerHTML='';
-    if(err){addErr(err,function(){startLab(t);});}
-    else{
-      msgs=[{role:'assistant',content:reply}];
-      addMsg('assistant',reply);addActions();ready=true;
-      document.getElementById('rbtn').style.display='block';
-      document.getElementById('end-btn').style.display='block';
-      setInput(true,'Type your answer or action... (Shift+Enter for new line)');
-      if(mode.timerMins&&mode.timerMins[diff]) startTimer(timerSecs);
-      if(checkDone(reply)) setTimeout(function(){endSession('complete');},2000);
+  topic=t;msgs=[];ready=false;busy=true;xc=0;lastTx=null;labDone=false;
+  stopTimer();timerSec=0;
+  notesOpen=false;
+  var np=document.getElementById("notes-panel");if(np) np.style.display="none";
+  var nb=document.getElementById("notes-btn");if(nb){nb.style.background="";nb.style.color="";nb.style.borderColor="";}
+  document.getElementById("lab-icon").innerHTML=mode.iconHtml;
+  document.getElementById("lab-topic").textContent=topic;
+  document.getElementById("lab-tag").textContent=mode.label.toUpperCase();
+  document.getElementById("lab-tag").style.color=mode.color;
+  document.getElementById("lab-line").style.background="linear-gradient(90deg,transparent,"+mode.color+",transparent)";
+  document.getElementById("diff-badge").textContent=capitalize(selectedDiff);
+  document.getElementById("diff-badge").style.background=DIFF_COLORS[selectedDiff]+"22";
+  document.getElementById("diff-badge").style.color=DIFF_COLORS[selectedDiff];
+  document.getElementById("diff-badge").style.borderColor=DIFF_COLORS[selectedDiff]+"66";
+  var tc=document.getElementById("timer-container");
+  if(mode.hasTimer) tc.style.display="flex"; else tc.style.display="none";
+  document.getElementById("timer-display").textContent="00:00";
+  document.getElementById("xc").style.display="none";
+  document.getElementById("rbtn").style.display="none";
+  document.getElementById("end-btn").style.display="none";
+  setInput(false,"Generating your lab...");
+  showScreen("lab");
+  var chat=document.getElementById("chat");
+  chat.innerHTML="<div class=\"loading-state\"><div class=\"spinner\"></div>"
+    +"<div class=\"loading-text\">Generating lab environment</div>"
+    +"<div class=\"ld\"><span></span><span></span><span></span></div></div>";
+  ajax([{role:"user",content:"Start the lab."}],function(reply,err){
+    chat.innerHTML="";
+    if(err){
+      addErr("Lab failed: "+err,function(){startLab(t);});
+    } else {
+      msgs=[{role:"assistant",content:reply}];
+      addMsg("assistant",reply);addActions();
+      ready=true;
+      document.getElementById("rbtn").style.display="block";
+      document.getElementById("end-btn").style.display="block";
+      setInput(true,"Type your answer or action... (Shift+Enter for new line)");
+      if(mode.hasTimer) startTimer();
+      if(reply.indexOf("===LAB COMPLETE===")>-1) completeLab();
     }
     busy=false;syncBtn();
   });
 }
-
 function restartLab(){
   if(busy) return;
-  if(!confirm('Restart this lab? Your progress will be lost.')) return;
+  if(!confirm("Restart this lab? Your progress will be lost.")) return;
   startLab(topic);
 }
-
-function exitLab(){stopTimer();msgs=[];ready=false;busy=false;sessionDone=false;showScreen('select');}
-
-function endSession(reason){
-  if(sessionDone) return;
-  sessionDone=true;stopTimer();ready=false;
-  setInput(false,'Session ended');
-  var qa=document.getElementById('chat').querySelector('.quick-actions');
-  if(qa) qa.remove();
-  setTimeout(function(){showComplete(reason);},reason==='complete'?1500:600);
+function exitLab(){msgs=[];ready=false;busy=false;stopTimer();showScreen("select");}
+function endLab(){
+  if(!ready||busy||labDone) return;
+  busy=true;stopTimer();
+  var qa=document.getElementById("chat").querySelector(".quick-actions");if(qa) qa.remove();
+  addTyping();
+  var endMsg="Please conclude this lab session now. Provide a brief final summary: what was covered, how the student performed, and one key takeaway. Then end with exactly: ===LAB COMPLETE===";
+  ajax(msgs.concat([{role:"user",content:endMsg}]),function(reply,err){
+    rmTyping();
+    if(err){busy=false;ready=true;syncBtn();return;}
+    msgs.push({role:"assistant",content:reply});
+    addMsg("assistant",reply);
+    busy=false;syncBtn();
+    completeLab();
+  });
+}
+function completeLab(){
+  labDone=true;stopTimer();ready=false;
+  setInput(false,"Lab complete.");
+  document.getElementById("end-btn").style.display="none";
+  var chat=document.getElementById("chat");
+  var qa=chat.querySelector(".quick-actions");if(qa) qa.remove();
+  saveToHistory();
+  var div=document.createElement("div");
+  div.className="complete-card";
+  var tstr=(mode.hasTimer&&timerSec>0)?" &middot; "+fmtTime(timerSec):"";
+  div.innerHTML="<div class=\"cc-icon\">&#10003;</div>"
+    +"<div class=\"cc-title\">Lab Complete!</div>"
+    +"<div class=\"cc-meta\">"+topic+" &middot; "+capitalize(selectedDiff)+tstr+"</div>"
+    +"<div id=\"lab-feedback\" class=\"cc-feedback\">"
+    +"<div class=\"fb-prompt\">How was this lab?</div>"
+    +"<div class=\"fb-btns\">"
+    +"<button class=\"fb-btn\" onclick=\"submitFeedback('great')\">&#128077; Great</button>"
+    +"<button class=\"fb-btn\" onclick=\"submitFeedback('ok')\">&#128528; OK</button>"
+    +"<button class=\"fb-btn\" onclick=\"submitFeedback('hard')\">&#128547; Too Hard</button>"
+    +"</div></div>"
+    +"<div class=\"cc-actions\">"
+    +"<button class=\"cc-btn\" onclick=\"downloadCard()\">&#11015; Download Card</button>"
+    +"<button class=\"cc-btn cc-outline\" onclick=\"exitLab()\">New Lab</button>"
+    +"<button class=\"cc-btn cc-outline\" onclick=\"startLab(topic)\">Try Again</button>"
+    +"</div>";
+  chat.appendChild(div);
+  chat.scrollTop=chat.scrollHeight;
 }
 
-function showComplete(reason){
-  var elapsed=startTime?Math.floor((new Date()-startTime)/1000):0;
-  var mins=Math.floor(elapsed/60),secs=elapsed%60;
-  var timeStr=(mins>0?mins+'m ':'')+secs+'s';
-  var outcome,oColor,emoji,msg;
-  if(reason==='timeout'){outcome='Time\'s Up';oColor='#EF4444';emoji='&#9201;';msg='The clock ran out. Review the challenge and try again!';}
-  else if(reason==='ended'){outcome='Ended Early';oColor='#D97706';emoji='&#128203;';msg='Session closed. Come back anytime to keep practicing.';}
-  else{
-    if(mode.id==='ctf'){outcome='Flag Captured!';oColor='#0D9488';emoji='&#127937;';msg='Excellent work solving the challenge!';}
-    else if(mode.id==='simulation'){outcome='Simulation Complete';oColor='#0D9488';emoji='&#127775;';msg='Well done navigating the scenario. Review the debrief for insights.';}
-    else{outcome='Lab Complete';oColor='#7C3AED';emoji='&#128218;';msg='All questions evaluated. Review your answers and the exam tips.';}
-  }
-  document.getElementById('comp-emoji').innerHTML=emoji;
-  document.getElementById('comp-outcome').textContent=outcome;
-  document.getElementById('comp-outcome').style.color=oColor;
-  document.getElementById('comp-mode').textContent=mode.label;
-  document.getElementById('comp-topic').textContent=topic;
-  document.getElementById('comp-diff').textContent=diff;
-  document.getElementById('comp-diff').style.color=mode.color;
-  document.getElementById('comp-time').textContent=timeStr;
-  document.getElementById('comp-xc').textContent=xc;
-  document.getElementById('comp-msg').textContent=msg;
-  showScreen('complete');
-}
-
-function startTimer(secs){
-  timerSecs=secs;updateTimerDisplay();
+/* -- TIMER -- */
+function startTimer(){
+  timerSec=0;
   timerInt=setInterval(function(){
-    timerSecs--;updateTimerDisplay();
-    if(timerSecs<=0){stopTimer();endSession('timeout');}
+    timerSec++;
+    var el=document.getElementById("timer-display");
+    if(el) el.textContent=fmtTime(timerSec);
   },1000);
 }
 function stopTimer(){if(timerInt){clearInterval(timerInt);timerInt=null;}}
-function updateTimerDisplay(){
-  var m=Math.floor(timerSecs/60),s=timerSecs%60;
-  var disp=(m<10?'0':'')+m+':'+(s<10?'0':'')+s;
-  var el=document.getElementById('timer-display');
-  if(el){el.textContent=disp;el.style.color=timerSecs<60?'#EF4444':'#0D9488';el.style.fontWeight=timerSecs<60?'700':'600';}
+function fmtTime(s){
+  var m=Math.floor(s/60),sec=s%60;
+  return(m<10?"0":"")+m+":"+(sec<10?"0":"")+sec;
 }
 
-function toggleNotes(){
-  var p=document.getElementById('notes-panel');
-  if(p.classList.contains('open')) p.classList.remove('open');
-  else{p.classList.add('open');document.getElementById('notes-input').focus();}
-}
-function saveNotes(){
-  var txt=document.getElementById('notes-input').value;
-  try{localStorage.setItem('kulan-notes',txt);}catch(e){}
-  var dot=document.getElementById('notes-dot');
-  if(dot) dot.style.display=txt.length>0?'inline-block':'none';
-}
-function loadNotes(){
-  try{
-    var saved=localStorage.getItem('kulan-notes');
-    if(saved){document.getElementById('notes-input').value=saved;
-      var dot=document.getElementById('notes-dot');
-      if(dot) dot.style.display=saved.length>0?'inline-block':'none';}
-  }catch(e){}
-}
-function clearNotes(){
-  document.getElementById('notes-input').value='';
-  try{localStorage.removeItem('kulan-notes');}catch(e){}
-  var dot=document.getElementById('notes-dot');
-  if(dot) dot.style.display='none';
-}
-
-function checkDone(text){
-  var lower=text.toLowerCase();
-  if(mode.id==='ctf'&&(lower.indexOf('flag captured')>-1||lower.indexOf('correct! flag')>-1)) return true;
-  if(mode.id==='simulation'&&lower.indexOf('session complete')>-1) return true;
-  if(mode.id==='secplus'&&lower.indexOf('lab complete')>-1) return true;
-  return false;
-}
-
+/* -- SEND -- */
 function sendMsg(prefill){
-  var inp=document.getElementById('chat-input');
+  var inp=document.getElementById("chat-input");
   var txt=prefill||inp.value.trim();
-  if(!txt||busy||!ready||sessionDone) return;
-  inp.value='';resize(inp);busy=true;lastTx=txt;syncBtn();
-  msgs.push({role:'user',content:txt});addMsg('user',txt);
-  var qa=document.getElementById('chat').querySelector('.quick-actions');
-  if(qa) qa.remove();
+  if(!txt||busy||!ready||labDone) return;
+  inp.value="";resize(inp);busy=true;lastTx=txt;syncBtn();
+  msgs.push({role:"user",content:txt});addMsg("user",txt);
+  var qa=document.getElementById("chat").querySelector(".quick-actions");if(qa) qa.remove();
   addTyping();
   ajax(msgs,function(reply,err){
     rmTyping();
-    if(err){addErr(err,function(){retryLast();});}
+    if(err){addErr("Error: "+err,function(){retryLast();});}
     else{
-      msgs.push({role:'assistant',content:reply});addMsg('assistant',reply);
-      xc++;document.getElementById('xn').textContent=xc;
-      document.getElementById('xc').style.display='block';
-      if(checkDone(reply)){
-        setTimeout(function(){endSession('complete');},2000);
-      } else {
-        addActions();
-        if(xc>=(maxX[diff]||12)){
-          var chat=document.getElementById('chat');
-          var d=document.createElement('div');
-          d.style.cssText='text-align:center;padding:14px;font-size:12px;color:var(--muted);border-top:1px solid var(--border);margin-top:10px;';
-          d.textContent='Session limit reached for '+diff+' difficulty. Wrapping up...';
-          chat.appendChild(d);chat.scrollTop=chat.scrollHeight;
-          setTimeout(function(){endSession('ended');},2500);
-        }
-      }
+      msgs.push({role:"assistant",content:reply});addMsg("assistant",reply);
+      xc++;document.getElementById("xn").textContent=xc;
+      document.getElementById("xc").style.display="block";
+      if(!labDone) addActions();
+      if(reply.indexOf("===LAB COMPLETE===")>-1) completeLab();
     }
     busy=false;syncBtn();
   });
 }
-
 function retryLast(){
   if(!lastTx||busy) return;
-  var chat=document.getElementById('chat');
-  var errs=chat.querySelectorAll('.err-msg');
-  var usrs=chat.querySelectorAll('.message.user');
-  if(errs.length) errs[errs.length-1].remove();
-  if(usrs.length) usrs[usrs.length-1].remove();
-  for(var i=msgs.length-1;i>=0;i--){
-    if(msgs[i].role==='user'&&msgs[i].content===lastTx){msgs.splice(i,1);break;}
-  }
+  var chat=document.getElementById("chat");
+  var errs=chat.querySelectorAll(".err-msg");if(errs.length) errs[errs.length-1].remove();
+  var usrs=chat.querySelectorAll(".message.user");if(usrs.length) usrs[usrs.length-1].remove();
+  for(var i=msgs.length-1;i>=0;i--){if(msgs[i].role==="user"&&msgs[i].content===lastTx){msgs.splice(i,1);break;}}
   sendMsg(lastTx);
 }
 
+/* -- NOTES -- */
+function toggleNotes(){
+  notesOpen=!notesOpen;
+  var np=document.getElementById("notes-panel");
+  var nb=document.getElementById("notes-btn");
+  if(notesOpen){
+    np.style.display="flex";
+    nb.style.background="#0D9488";nb.style.color="#fff";nb.style.borderColor="#0D9488";
+  } else {
+    np.style.display="none";
+    nb.style.background="";nb.style.color="";nb.style.borderColor="";
+  }
+}
+function copyNotes(){
+  var ta=document.getElementById("notes-input");
+  if(!ta||!ta.value.trim()) return;
+  navigator.clipboard.writeText(ta.value).then(function(){
+    var btn=document.getElementById("copy-notes-btn");
+    if(btn){btn.textContent="Copied!";setTimeout(function(){btn.textContent="Copy";},1500);}
+  });
+}
+function clearNotes(){var ta=document.getElementById("notes-input");if(ta) ta.value="";}
+
+/* -- HISTORY -- */
+function getHistory(){
+  try{var r=localStorage.getItem("kulan_labs_history");return r?JSON.parse(r):[];}
+  catch(e){return[];}
+}
+function saveToHistory(){
+  try{
+    var entry={
+      id:Date.now(), topic:topic, modeLabel:mode.label,
+      modeKey:modeKey, color:mode.color,
+      difficulty:selectedDiff, timeSec:timerSec,
+      completedAt:new Date().toISOString(), feedback:null
+    };
+    var h=getHistory();
+    h.unshift(entry);
+    if(h.length>50) h=h.slice(0,50);
+    localStorage.setItem("kulan_labs_history",JSON.stringify(h));
+    updateHistoryBtn();
+  }catch(e){}
+}
+function updateFeedbackInHistory(val){
+  try{
+    var h=getHistory();
+    if(h.length>0){h[0].feedback=val;localStorage.setItem("kulan_labs_history",JSON.stringify(h));}
+  }catch(e){}
+}
+function updateHistoryBtn(){
+  var h=getHistory();
+  var btn=document.getElementById("hist-btn");
+  if(!btn) return;
+  var n=h.length;
+  btn.innerHTML="&#128203; History"+(n>0?" <span class=\"hist-count\">"+n+"</span>":"");
+}
+function openHistory(){
+  document.getElementById("hist-modal").style.display="flex";
+  renderHistory();
+}
+function closeHistory(){document.getElementById("hist-modal").style.display="none";}
+function clearHistory(){
+  if(!confirm("Clear all lab history? This cannot be undone.")) return;
+  localStorage.removeItem("kulan_labs_history");
+  updateHistoryBtn();
+  renderHistory();
+}
+function renderHistory(){
+  var h=getHistory();
+  var el=document.getElementById("hist-list");
+  if(!el) return;
+  if(h.length===0){
+    el.innerHTML="<div class=\"hist-empty\"><div style=\"font-size:40px;margin-bottom:12px\">&#128203;</div><p style=\"font-weight:700;color:#0F172A;margin-bottom:6px\">No labs yet</p><p style=\"color:#64748B;font-size:13px\">Complete your first lab to see your history here.</p></div>";
+    return;
+  }
+  var totalByMode={ctf:0,simulation:0,secplus:0};
+  var html="<div class=\"hist-stats\">";
+  for(var i=0;i<h.length;i++) if(h[i].modeKey) totalByMode[h[i].modeKey]=(totalByMode[h[i].modeKey]||0)+1;
+  html+="<div class=\"hs-item\"><span class=\"hs-num\">"+h.length+"</span><span class=\"hs-label\">Total</span></div>";
+  html+="<div class=\"hs-item\"><span class=\"hs-num\" style=\"color:#0D9488\">"+(totalByMode.ctf||0)+"</span><span class=\"hs-label\">CTF</span></div>";
+  html+="<div class=\"hs-item\"><span class=\"hs-num\" style=\"color:#D97706\">"+(totalByMode.simulation||0)+"</span><span class=\"hs-label\">Simulations</span></div>";
+  html+="<div class=\"hs-item\"><span class=\"hs-num\" style=\"color:#7C3AED\">"+(totalByMode.secplus||0)+"</span><span class=\"hs-label\">Security+</span></div>";
+  html+="</div><div class=\"hist-entries\">";
+  for(var j=0;j<h.length;j++){
+    var e=h[j];
+    var d=new Date(e.completedAt).toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"});
+    var tstr=(e.timeSec>0&&e.modeKey==="ctf")?" &middot; "+fmtTime(e.timeSec):"";
+    var fb=e.feedback==="great"?"&#128077;":e.feedback==="ok"?"&#128528;":e.feedback==="hard"?"&#128547;":"";
+    var dc=DIFF_COLORS[e.difficulty]||"#64748B";
+    html+="<div class=\"hist-item\">"
+        +"<div class=\"hist-dot\" style=\"background:"+(e.color||"#0D9488")+"\"></div>"
+        +"<div class=\"hist-info\">"
+        +"<div class=\"hist-topic\">"+e.topic+"</div>"
+        +"<div class=\"hist-sub\">"+e.modeLabel+" &middot; <span style=\"color:"+dc+";font-weight:700\">"+capitalize(e.difficulty)+"</span>"+tstr+" &middot; "+d+(fb?" "+fb:"")+"</div>"
+        +"</div></div>";
+  }
+  html+="</div>";
+  el.innerHTML=html;
+}
+
+/* -- FEEDBACK -- */
+function submitFeedback(val){
+  updateFeedbackInHistory(val);
+  var el=document.getElementById("lab-feedback");
+  if(el){
+    var msgs2={"great":"Thanks! Glad it was helpful. &#127881;","ok":"Got it. We'll keep improving! &#128170;","hard":"Noted! Try Beginner difficulty next time. &#128170;"};
+    el.innerHTML="<div class=\"fb-thanks\">"+(msgs2[val]||"Thanks for the feedback!")+"</div>";
+  }
+}
+
+/* -- DOWNLOAD CARD -- */
+function downloadCard(){
+  var W=800,H=440;
+  var canvas=document.createElement("canvas");
+  var dpr=Math.min(window.devicePixelRatio||1,2);
+  canvas.width=W*dpr; canvas.height=H*dpr;
+  var ctx=canvas.getContext("2d");
+  ctx.scale(dpr,dpr);
+
+  /* background */
+  ctx.fillStyle="#F8FAFB";
+  ctx.fillRect(0,0,W,H);
+
+  /* subtle grid */
+  ctx.strokeStyle="rgba(13,148,136,0.06)";
+  ctx.lineWidth=1;
+  for(var gx=0;gx<W;gx+=40){ctx.beginPath();ctx.moveTo(gx,0);ctx.lineTo(gx,H);ctx.stroke();}
+  for(var gy=0;gy<H;gy+=40){ctx.beginPath();ctx.moveTo(0,gy);ctx.lineTo(W,gy);ctx.stroke();}
+
+  /* top teal bar */
+  ctx.fillStyle="#0D9488";
+  ctx.fillRect(0,0,W,6);
+
+  /* left navy accent */
+  ctx.fillStyle="#0B2545";
+  ctx.fillRect(0,0,5,H);
+
+  /* white card area */
+  ctx.fillStyle="#FFFFFF";
+  drawRoundRectFill(ctx,30,24,W-60,H-48,14);
+
+  /* teal accent on card top */
+  ctx.fillStyle="#0D9488";
+  drawRoundRectTopFill(ctx,30,24,W-60,4,14);
+
+  /* header */
+  ctx.fillStyle="#0B2545";
+  ctx.font="bold 12px \"Courier New\",monospace";
+  ctx.fillText("KULAN INSTITUTE CYBER LAB",56,58);
+  ctx.fillStyle="#94A3B8";
+  ctx.font="10px \"Courier New\",monospace";
+  ctx.fillText("labs.kulaninstitute.org",56,74);
+
+  /* check circle */
+  ctx.beginPath();
+  ctx.arc(W-80,60,32,0,Math.PI*2);
+  ctx.fillStyle="#0D9488";
+  ctx.fill();
+  ctx.fillStyle="#FFFFFF";
+  ctx.font="bold 24px Arial";
+  ctx.textAlign="center";
+  ctx.fillText("\u2713",W-80,68);
+  ctx.textAlign="left";
+
+  /* divider */
+  ctx.fillStyle="#E2E8F0";
+  ctx.fillRect(56,90,W-112,1);
+
+  /* LAB COMPLETE label */
+  ctx.fillStyle="#0D9488";
+  ctx.font="bold 11px \"Courier New\",monospace";
+  ctx.fillText("LAB COMPLETE",56,118);
+
+  /* topic */
+  ctx.fillStyle="#0F172A";
+  ctx.font="bold 32px Arial,sans-serif";
+  var ttext=topic;
+  while(ctx.measureText(ttext).width>660&&ttext.length>4) ttext=ttext.slice(0,-1);
+  if(ttext!==topic) ttext+=".";
+  ctx.fillText(ttext,56,164);
+
+  /* mode */
+  ctx.fillStyle="#64748B";
+  ctx.font="17px Arial,sans-serif";
+  ctx.fillText(mode.label,56,196);
+
+  /* difficulty badge */
+  var dc2=DIFF_COLORS[selectedDiff];
+  var dl=capitalize(selectedDiff);
+  ctx.fillStyle=dc2+"22";
+  drawPill(ctx,56,212,100,26,true,false);
+  ctx.strokeStyle=dc2;ctx.lineWidth=1.5;
+  drawPill(ctx,56,212,100,26,false,true);
+  ctx.fillStyle=dc2;
+  ctx.font="bold 11px \"Courier New\",monospace";
+  ctx.textAlign="center";
+  ctx.fillText(dl,106,229);
+  ctx.textAlign="left";
+
+  /* time badge (CTF) */
+  if(mode.hasTimer&&timerSec>0){
+    ctx.fillStyle="#FFFBEB";
+    drawPill(ctx,166,212,100,26,true,false);
+    ctx.strokeStyle="#FDE68A";ctx.lineWidth=1.5;
+    drawPill(ctx,166,212,100,26,false,true);
+    ctx.fillStyle="#D97706";
+    ctx.font="bold 11px \"Courier New\",monospace";
+    ctx.textAlign="center";
+    ctx.fillText(fmtTime(timerSec),216,229);
+    ctx.textAlign="left";
+  }
+
+  /* date */
+  var dateStr=new Date().toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"});
+  ctx.fillStyle="#94A3B8";
+  ctx.font="12px Arial,sans-serif";
+  ctx.fillText(dateStr,56,268);
+
+  /* quote */
+  ctx.fillStyle="#E2E8F0";
+  ctx.fillRect(56,292,W-112,1);
+  ctx.fillStyle="#0B2545";
+  ctx.font="italic 15px Georgia,serif";
+  ctx.fillText("\"Learn. Grow. Lead.\"",56,324);
+
+  /* bottom footer */
+  ctx.fillStyle="#E2E8F0";
+  ctx.fillRect(56,370,W-112,1);
+  ctx.fillStyle="#94A3B8";
+  ctx.font="11px \"Courier New\",monospace";
+  ctx.fillText("kulaninstitute.org",56,392);
+  ctx.textAlign="right";
+  ctx.fillText("Powered by Claude AI",W-56,392);
+  ctx.textAlign="left";
+
+  /* download */
+  var a=document.createElement("a");
+  a.download="kulan-lab-"+topic.replace(/[^a-z0-9]/gi,"-").toLowerCase()+".png";
+  a.href=canvas.toDataURL("image/png");
+  a.click();
+}
+
+function drawRoundRectFill(ctx,x,y,w,h,r){
+  ctx.beginPath();
+  ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);
+  ctx.quadraticCurveTo(x+w,y,x+w,y+r);
+  ctx.lineTo(x+w,y+h-r);
+  ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
+  ctx.lineTo(x+r,y+h);
+  ctx.quadraticCurveTo(x,y+h,x,y+h-r);
+  ctx.lineTo(x,y+r);
+  ctx.quadraticCurveTo(x,y,x+r,y);
+  ctx.closePath();ctx.fill();
+}
+function drawRoundRectTopFill(ctx,x,y,w,h,r){
+  ctx.beginPath();
+  ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);
+  ctx.quadraticCurveTo(x+w,y,x+w,y+r);
+  ctx.lineTo(x+w,y+h);ctx.lineTo(x,y+h);
+  ctx.lineTo(x,y+r);
+  ctx.quadraticCurveTo(x,y,x+r,y);
+  ctx.closePath();ctx.fill();
+}
+function drawPill(ctx,x,y,w,h,fill,stroke){
+  var r=h/2;
+  ctx.beginPath();
+  ctx.arc(x+r,y+r,r,Math.PI/2*3,Math.PI/2,true);
+  ctx.arc(x+w-r,y+r,r,Math.PI/2,Math.PI/2*3,true);
+  ctx.closePath();
+  if(fill) ctx.fill();
+  if(stroke) ctx.stroke();
+}
+
+/* -- API -- */
 function ajax(m,cb){
   var xhr=new XMLHttpRequest();
-  xhr.open('POST',SUPA_URL,true);
-  xhr.setRequestHeader('Content-Type','application/json');
-  xhr.setRequestHeader('Authorization','Bearer '+SUPA_KEY);
-  xhr.setRequestHeader('apikey',SUPA_KEY);
+  xhr.open("POST",SUPA_URL,true);
+  xhr.setRequestHeader("Content-Type","application/json");
+  xhr.setRequestHeader("Authorization","Bearer "+SUPA_KEY);
+  xhr.setRequestHeader("apikey",SUPA_KEY);
   xhr.onreadystatechange=function(){
     if(xhr.readyState!==4) return;
     try{
-      if(xhr.status===0){cb(null,'Network/CORS blocked. Go to Supabase Edge Functions and disable JWT Verification on claude-proxy.');return;}
-      if(xhr.status===401){cb(null,'Unauthorized (401) - disable JWT Verification in Supabase Edge Function settings.');return;}
-      if(xhr.status===404){cb(null,'Edge Function not found (404). Make sure claude-proxy is deployed.');return;}
+      if(xhr.status===0){cb(null,"CORS error. Disable JWT verification in Supabase Edge Function settings.");return;}
+      if(xhr.status===401){cb(null,"Unauthorized (401). Disable JWT verification in Supabase.");return;}
+      if(xhr.status===404){cb(null,"Edge Function not found (404). Check claude-proxy is deployed.");return;}
       var d=JSON.parse(xhr.responseText);
-      if(d.error){cb(null,'API error: '+JSON.stringify(d.error).substring(0,150));return;}
+      if(d.error){cb(null,"API error: "+JSON.stringify(d.error).substring(0,120));return;}
       var tx=d.content&&d.content[0]&&d.content[0].text;
-      if(!tx){cb(null,'Empty response from Claude. Raw: '+xhr.responseText.substring(0,100));return;}
+      if(!tx){cb(null,"Empty response. Raw: "+xhr.responseText.substring(0,80));return;}
       cb(tx,null);
-    }catch(e){cb(null,'Parse error: '+e.message);}
+    }catch(e){cb(null,"Parse error: "+e.message);}
   };
-  xhr.onerror=function(){cb(null,'Network/CORS blocked. Disable JWT Verification in Supabase Edge Function settings.');};
-  xhr.send(JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1500,system:mode.prompt(topic,diff),messages:m}));
+  xhr.onerror=function(){cb(null,"Network error. Check your connection.");};
+  xhr.send(JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1500,system:mode.prompt(topic),messages:m}));
 }
 
+/* -- CHAT HELPERS -- */
 function addMsg(role,content){
-  var chat=document.getElementById('chat');
-  var now=new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
-  var d=document.createElement('div');d.className='message '+role;
-  d.innerHTML='<div class="msg-av '+role+'">'+(role==='user'?'YOU':'AI')+'</div>'
-    +'<div class="msg-body"><div class="msg-bub '+role+'">'+mdParse(content)+'</div>'
-    +'<div class="msg-time">'+now+'</div></div>';
+  var chat=document.getElementById("chat");
+  var clean=content.replace("===LAB COMPLETE===","").trim();
+  var now=new Date().toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"});
+  var d=document.createElement("div");
+  d.className="message "+role;
+  d.innerHTML="<div class=\"msg-av "+role+"\">"+(role==="user"?"YOU":"AI")+"</div>"
+    +"<div class=\"msg-body\"><div class=\"msg-bub "+role+"\">"+mdParse(clean)+"</div>"
+    +"<div class=\"msg-time\">"+now+"</div></div>";
   chat.appendChild(d);chat.scrollTop=chat.scrollHeight;
 }
-
 function addActions(){
-  if(!mode||!mode.actions||sessionDone) return;
-  var chat=document.getElementById('chat');
-  var old=chat.querySelector('.quick-actions');if(old) old.remove();
-  var d=document.createElement('div');d.className='quick-actions';
+  if(!mode||!mode.actions||labDone) return;
+  var chat=document.getElementById("chat");
+  var old=chat.querySelector(".quick-actions");if(old) old.remove();
+  var d=document.createElement("div");d.className="quick-actions";
   for(var i=0;i<mode.actions.length;i++){
-    var a=mode.actions[i],b=document.createElement('button');
-    b.className='quick-btn';b.textContent=a;b.setAttribute('data-a',a);
-    b.onclick=function(){sendMsg(this.getAttribute('data-a'));};
+    var a=mode.actions[i];
+    var b=document.createElement("button");
+    b.className="quick-btn";b.textContent=a;b.setAttribute("data-a",a);
+    b.onclick=function(){sendMsg(this.getAttribute("data-a"));};
     d.appendChild(b);
   }
   chat.appendChild(d);chat.scrollTop=chat.scrollHeight;
 }
-
 function addTyping(){
-  var chat=document.getElementById('chat');
-  var d=document.createElement('div');d.className='message assistant';d.id='typ';
-  d.innerHTML='<div class="msg-av ai">AI</div><div class="msg-body"><div class="msg-bub ai"><div class="typing-dots"><span></span><span></span><span></span></div></div></div>';
+  var chat=document.getElementById("chat");
+  var d=document.createElement("div");d.className="message assistant";d.id="typ";
+  d.innerHTML="<div class=\"msg-av ai\">AI</div><div class=\"msg-body\"><div class=\"msg-bub ai\"><div class=\"typing-dots\"><span></span><span></span><span></span></div></div></div>";
   chat.appendChild(d);chat.scrollTop=chat.scrollHeight;
 }
-function rmTyping(){var t=document.getElementById('typ');if(t) t.remove();}
-
+function rmTyping(){var t=document.getElementById("typ");if(t) t.remove();}
 function addErr(msg,fn){
-  var chat=document.getElementById('chat');
-  var d=document.createElement('div');d.className='err-msg';
-  var s=document.createElement('span');s.textContent='! '+msg;
-  var b=document.createElement('button');b.className='btn-retry';b.textContent='Retry';
+  var chat=document.getElementById("chat");
+  var d=document.createElement("div");d.className="err-msg";
+  var s=document.createElement("span");s.textContent=msg;
+  var b=document.createElement("button");b.className="btn-retry";b.textContent="Retry";
   b.onclick=function(){d.remove();fn();};
   d.appendChild(s);d.appendChild(b);chat.appendChild(d);chat.scrollTop=chat.scrollHeight;
 }
 
+/* -- MARKDOWN -- */
 function mdParse(s){
-  s=s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-  s=s.replace(/\*\*([^\n]+?)\*\*/g,'<strong>$1</strong>');
-  s=s.replace(/\*([^\n]+?)\*/g,'<em>$1</em>');
-  s=s.replace(/^### (.+)$/gm,'<h3>$1</h3>');
-  s=s.replace(/^\d+\. (.+)$/gm,'<li>$1</li>');
-  s=s.replace(/^- (.+)$/gm,'<li>$1</li>');
-  s=s.replace(/^---$/gm,'<hr>');
-  s=s.replace(/\n/g,'<br>');
+  s=s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+  s=s.replace(/\*\*([^\n]+?)\*\*/g,"<strong>$1</strong>");
+  s=s.replace(/\*([^\n]+?)\*/g,"<em>$1</em>");
+  s=s.replace(/^### (.+)$/gm,"<h3>$1</h3>");
+  s=s.replace(/^\d+\. (.+)$/gm,"<li>$1</li>");
+  s=s.replace(/^- (.+)$/gm,"<li>$1</li>");
+  s=s.replace(/^---$/gm,"<hr>");
+  s=s.replace(/\n/g,"<br>");
   return s;
 }
 
+/* -- UTILS -- */
+function capitalize(s){return s.charAt(0).toUpperCase()+s.slice(1);}
 function setInput(on,ph){
-  var el=document.getElementById('chat-input'),btn=document.getElementById('send-btn');
+  var el=document.getElementById("chat-input");
+  var btn=document.getElementById("send-btn");
   el.disabled=!on;el.placeholder=ph;
-  if(!on){btn.disabled=true;btn.classList.remove('ready');}
+  if(!on){btn.disabled=true;btn.classList.remove("ready");}
 }
 function syncBtn(){
-  var inp=document.getElementById('chat-input'),btn=document.getElementById('send-btn');
-  var ok=!busy&&ready&&!sessionDone&&inp.value.trim().length>0;
-  btn.disabled=!ok;btn.innerHTML=busy?'...':'SEND &rarr;';
-  if(ok) btn.classList.add('ready'); else btn.classList.remove('ready');
+  var inp=document.getElementById("chat-input");
+  var btn=document.getElementById("send-btn");
+  var ok=!busy&&ready&&!labDone&&inp.value.trim().length>0;
+  btn.disabled=!ok;
+  btn.innerHTML=busy?"...":"SEND &rarr;";
+  if(ok) btn.classList.add("ready"); else btn.classList.remove("ready");
 }
-function resize(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,160)+'px';}
-
-document.addEventListener('DOMContentLoaded',function(){
-  var inp=document.getElementById('chat-input');
-  inp.addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMsg();}});
-  inp.addEventListener('input',function(){resize(inp);syncBtn();});
-  var ni=document.getElementById('notes-input');
-  if(ni) ni.addEventListener('input',saveNotes);
+function resize(el){el.style.height="auto";el.style.height=Math.min(el.scrollHeight,160)+"px";}
+document.addEventListener("DOMContentLoaded",function(){
+  updateHistoryBtn();
+  var inp=document.getElementById("chat-input");
+  inp.addEventListener("keydown",function(e){if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendMsg();}});
+  inp.addEventListener("input",function(){resize(inp);syncBtn();});
+  document.getElementById("hist-modal").addEventListener("click",function(e){if(e.target===this) closeHistory();});
 });
 
 </script>
