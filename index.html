@@ -218,6 +218,8 @@ body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;mi
 .mobile-actions-bar{display:none;padding:8px 14px;background:var(--surface);border-top:1px solid var(--border);overflow-x:auto;gap:8px;flex-shrink:0}
 .mob-action-btn{flex-shrink:0;background:var(--surface2);border:1px solid var(--border);color:var(--text2);padding:7px 14px;border-radius:20px;cursor:pointer;font-family:'Share Tech Mono',monospace;font-size:11px;transition:all .2s;white-space:nowrap}
 .mob-action-btn:hover{border-color:var(--teal);color:var(--teal)}
+.wr{display:inline}
+
 
 /* TYPING */
 .typing-dots span{display:inline-block;width:6px;height:6px;background:var(--teal);border-radius:50%;animation:dot 1.4s infinite;margin:0 2px}
@@ -1095,29 +1097,49 @@ function ajax(m,cb){
 }
 
 /* ---- WORD BY WORD REVEAL ---- */
-function revealWords(el, html, onDone) {
-  var temp = document.createElement("div");
-  temp.innerHTML = html;
-  var fullText = temp.innerHTML;
-  /* split on word boundaries while preserving tags */
-  var tokens = [];
-  var re = /(<[^>]+>)|([^<\s]+\s*)/g;
-  var match;
-  while ((match = re.exec(fullText)) !== null) {
-    tokens.push(match[0]);
-  }
-  el.innerHTML = "";
-  var i = 0;
-  var SPEED = 18;
-  function next() {
-    if (i >= tokens.length) {
-      if (onDone) onDone();
-      return;
+function wrapWords(node, spans) {
+  var children = Array.prototype.slice.call(node.childNodes);
+  for (var i = 0; i < children.length; i++) {
+    var child = children[i];
+    if (child.nodeType === 3) {
+      /* text node - split into words */
+      var parts = child.textContent.split(/(\s+)/);
+      var frag = document.createDocumentFragment();
+      for (var j = 0; j < parts.length; j++) {
+        if (parts[j].match(/\S/)) {
+          var sp = document.createElement("span");
+          sp.className = "wr";
+          sp.textContent = parts[j];
+          sp.style.opacity = "0";
+          sp.style.transition = "opacity 0.08s";
+          spans.push(sp);
+          frag.appendChild(sp);
+        } else if (parts[j]) {
+          frag.appendChild(document.createTextNode(parts[j]));
+        }
+      }
+      child.parentNode.replaceChild(frag, child);
+    } else if (child.nodeType === 1 && child.tagName !== "SCRIPT") {
+      wrapWords(child, spans);
     }
-    el.innerHTML += tokens[i];
-    i++;
-    scrollBot();
-    if (tokens[i-1] && tokens[i-1].charAt(0) !== "<") playTick();
+  }
+}
+function revealWords(el, html, onDone) {
+  el.innerHTML = html;
+  var spans = [];
+  wrapWords(el, spans);
+  if (spans.length === 0) { if (onDone) onDone(); return; }
+  var idx = 0;
+  var SPEED = 16;
+  function next() {
+    if (idx >= spans.length) { if (onDone) onDone(); return; }
+    spans[idx].style.opacity = "1";
+    idx++;
+    if (atBottom) {
+      var chat = document.getElementById("chat");
+      if (chat) chat.scrollTop = chat.scrollHeight;
+    }
+    if (idx % 3 === 0) playTick();
     setTimeout(next, SPEED);
   }
   next();
@@ -1199,33 +1221,57 @@ function addErr(msg,fn){
 }
 
 /* ---- MARKDOWN ---- */
-function mdParse(s){
-  s=s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
-  /* standalone bold headers get styled section dividers */
-  s=s.replace(/^\*\*([^\n]+?)\*\*\s*$/gm,"<div class=\"msg-section\">$1</div>");
-  /* bold inline */
-  s=s.replace(/\*\*([^\n]+?)\*\*/g,"<strong>$1</strong>");
-  /* italic */
-  s=s.replace(/\*([^\n]+?)\*/g,"<em>$1</em>");
-  /* h3 */
-  s=s.replace(/^### (.+)$/gm,"<h3 class=\"msg-h3\">$1</h3>");
-  /* numbered list -- wrap consecutive items */
-  s=s.replace(/((?:^\d+\. .+\n?)+)/gm,function(block){
-    var items=block.trim().split("\n");
-    return "<ol>"+items.map(function(it){return "<li>"+it.replace(/^\d+\. /,"")+"</li>";}).join("")+"</ol>";
-  });
-  /* bullet list -- wrap consecutive items */
-  s=s.replace(/((?:^- .+\n?)+)/gm,function(block){
-    var items=block.trim().split("\n");
-    return "<ul>"+items.map(function(it){return "<li>"+it.replace(/^- /,"")+"</li>";}).join("")+"</ul>";
-  });
-  /* hr */
-  s=s.replace(/^---$/gm,"<hr>");
-  /* collapse 2+ newlines into one paragraph break */
-  s=s.replace(/\n{2,}/g,"</p><p class=\"msg-p\">");
-  /* single newlines become space */
-  s=s.replace(/\n/g," ");
-  return "<p class=\"msg-p\">"+s+"</p>";
+function processInline(s) {
+  s = s.replace(/\*\*([^\n]+?)\*\*/g, "<strong>$1</strong>");
+  s = s.replace(/\*([^\n]+?)\*/g, "<em>$1</em>");
+  return s;
+}
+function mdParse(s) {
+  /* escape HTML first */
+  s = s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+  /* split into blocks by one or more blank lines */
+  var rawBlocks = s.split(/\n{2,}/);
+  var out = "";
+  for (var bi = 0; bi < rawBlocks.length; bi++) {
+    var block = rawBlocks[bi].trim();
+    if (!block) continue;
+    /* standalone bold header line */
+    var hm = block.match(/^\*\*([^\n*]+?)\*\*\s*$/);
+    if (hm) {
+      out += "<div class=\"msg-section\">" + hm[1] + "</div>";
+      continue;
+    }
+    /* h3 */
+    if (/^### /.test(block)) {
+      out += "<h3 class=\"msg-h3\">" + processInline(block.replace(/^### /,"")) + "</h3>";
+      continue;
+    }
+    /* hr */
+    if (block === "---") {
+      out += "<hr>";
+      continue;
+    }
+    /* numbered list */
+    if (/^\d+\. /.test(block)) {
+      var nitems = block.split("\n").filter(function(l){return l.trim();});
+      out += "<ol>" + nitems.map(function(it){
+        return "<li>" + processInline(it.replace(/^\d+\. /,"")) + "</li>";
+      }).join("") + "</ol>";
+      continue;
+    }
+    /* bullet list */
+    if (/^- /.test(block)) {
+      var bitems = block.split("\n").filter(function(l){return l.trim();});
+      out += "<ul>" + bitems.map(function(it){
+        return "<li>" + processInline(it.replace(/^- /,"")) + "</li>";
+      }).join("") + "</ul>";
+      continue;
+    }
+    /* regular paragraph - join lines with space */
+    var lines = block.split("\n").map(function(l){return processInline(l.trim());}).filter(Boolean);
+    out += "<p class=\"msg-p\">" + lines.join(" ") + "</p>";
+  }
+  return out || "<p class=\"msg-p\">" + processInline(s) + "</p>";
 }
 
 /* ---- UTILS ---- */
